@@ -28,7 +28,7 @@
 
     <script type="text/javascript">
       $(document).ready(function() {
-        if(window.innerwidth < 568) {
+        if(window.innerWidth < 568) {
           $("#logout_pc").css("display","none");
         }
         else {
