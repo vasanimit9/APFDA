@@ -31,7 +31,7 @@
 		$qry = "SELECT * FROM `users`";
 		$run = mysqli_query($conn,$qry);
 
-		$qry2 = "SELECT * FROM `user_type`";
+		$qry2 = "SELECT * FROM `user_type` ORDER BY id ASC";
 		$run2 = mysqli_query($conn,$qry2);
 
 		$type = array();
@@ -48,6 +48,7 @@
 						<th>Email</th>
 						<th>Type</th>
 						<th></th>
+						<th></th>
 					</tr>
 
 <?php
@@ -59,11 +60,35 @@
 						<td><?php echo $row['name']; ?></td>
 						<td><?php echo $row['user_email']; ?></td>
 						<td><?php echo $type[$row['user_type']-1]; ?></td>
-						<td><form action="details.php" method="post">
+						<td>
+							<form action="details.php" method="post">
 								<input type="text" name="uname" value="<?php echo $row['name'];  ?>" hidden>
 								<input type='text' value="<?php echo $row['id']; ?>" name="uid" hidden>
-								<button type="submit" class="btn btn-warning">More Details</button>
+								<button type="submit" class="btn btn-warning">More</button>
 							</form>
+						</td>
+						<td>
+							<form>
+							<select name="role" class="form-control" onfocus="hid('hidop<?php echo $row['id']; ?>')">
+								<option id="hidop<?php echo $row['id']; ?>">--Change Role--</option>
+								<?php
+
+								$qry3 = "SELECT * FROM `user_type`";
+								$run3 = mysqli_query($conn,$qry3);
+
+								while($row3 = mysqli_fetch_array($run3)) {
+									if($row3['id']==$row['user_type']) 
+										continue;
+									?>
+
+								<option value="<?php echo $row['id']; ?>"><?php echo $row3['type']; ?></option>
+									<?php
+								}
+
+								?>
+							</select>
+							<button type="submit" class="btn btn-success">Go</button>
+						</form>
 						</td>
 					</tr>
 					<?php
