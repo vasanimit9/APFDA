@@ -3,7 +3,7 @@
 	//carrying the session varaibles from other pages
 	session_start();
 
-	if(!empty($_SESSION)) {
+	if(!isset($_SESSION['user_email'])) {
 		header("Location: ./dashboard.php");
 	}
 
