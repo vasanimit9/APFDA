@@ -2,6 +2,13 @@
 	
 	session_start();
 
+	if(!isset($_SESSION['user_email'])) {
+		header("Location: ./");
+	}
+	else if($_SESSION['type']>3) {
+		header("Location: ./dashboard.php");
+	}
+
 	include "dbconnect.php";
 	include "classes.php";
 
@@ -23,6 +30,16 @@
 
 		$qry = "SELECT * FROM `users`";
 		$run = mysqli_query($conn,$qry);
+
+		$qry2 = "SELECT * FROM `user_type`";
+		$run2 = mysqli_query($conn,$qry2);
+
+		$type = array();
+
+		while($row2 = mysqli_fetch_array($run2)) {
+			$type[] = $row2['type'];
+		}
+
 ?>
 
 				<table class="table table-responsive table-striped">
@@ -36,7 +53,20 @@
 <?php
 		while($row = mysqli_fetch_array($run)) {
 
+					?>
 
+					<tr>
+						<td><?php echo $row['name']; ?></td>
+						<td><?php echo $row['user_email']; ?></td>
+						<td><?php echo $type[$row['user_type']-1]; ?></td>
+						<td><form action="details.php" method="post">
+								<input type="text" name="uname" value="<?php echo $row['name'];  ?>" hidden>
+								<input type='text' value="<?php echo $row['id']; ?>" name="uid" hidden>
+								<button type="submit" class="btn btn-warning">More Details</button>
+							</form>
+						</td>
+					</tr>
+					<?php
 
 		}
 
