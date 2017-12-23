@@ -10,7 +10,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <?php if ($_SESSION['type'] < 3) { ?>
+          <?php if ($_SESSION['type'] < 4) { ?>
           <li class="nav-item active">
             <a class="nav-link" href="./cpanel.php">Admin Panel</a>
           </li>
