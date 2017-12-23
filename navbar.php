@@ -18,11 +18,21 @@
           <li class="nav-item active">
             <a class="nav-link" href="#">Link</a>
           </li>
-          <!-- <li class="nav-item active">
+          <li class="nav-item active" id="logout_phone">
             <a class="nav-link" href="./logout.php">Log out</a>
-          </li> -->
+          </li>
         </ul>
-        <a class="nav-link my-2 my-md-0 text-white" href="./logout.php">Log out</a>
+        <a class="nav-link my-2 my-md-0 text-white" id="logout_pc" href="./logout.php">Log out</a>
       </div>
     </nav>
 
+    <script type="text/javascript">
+      $(document).ready(function() {
+        if(window.innerwidth < 568) {
+          $("#logout_pc").css("display","none");
+        }
+        else {
+          $("#logout_phone").css("display","none");
+        }
+      });
+    </script>
