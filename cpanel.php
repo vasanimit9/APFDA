@@ -28,9 +28,13 @@
 				
 <?php
 
+
+		//initializing query for fetching users from the database
 		$qry = "SELECT * FROM `users`";
 		$run = mysqli_query($conn,$qry);
 
+		//initializing and executing query for displaying and using user types
+		//while storing the user types in the array >>type<<
 		$qry2 = "SELECT * FROM `user_type` ORDER BY id ASC";
 		$run2 = mysqli_query($conn,$qry2);
 
@@ -40,6 +44,8 @@
 			$type[] = $row2['type'];
 		}
 
+
+		//displaying the users in a table
 ?>
 
 				<table class="table table-responsive table-striped">
