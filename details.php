@@ -28,9 +28,10 @@
 			<div class="col-md-12">
 				<table class="table table-responsive table-striped">
 					<tr>
-						<th>Name</th>
-						<td><?php echo $_POST['uname']; ?></td>
+						<th style="min-width: 250px;">Name</th>
+						<td style="min-width: 250px;"><?php echo $_POST['uname']; ?></td>
 					</tr>
+					<form>
 					<?php
 
 					$id = $_POST['uid'];
@@ -43,12 +44,19 @@
 						?>
 					<tr>
 						<th><?php echo $row['property_name']; ?></th>
-						<td><?php echo $row['property_value'] ?></td>
+						<td><input type="text" value="<?php echo $row['property_value'] ?>" name="<?php echo $row['property_name']; ?>" class="form-control"></td>
 					</tr>
 						<?php
 					}
 
 					?>
+					<tr>
+						<td></td>
+						<td>
+							<button type="submit" class="btn btn-primary">Change</button>
+						</td>
+					</tr>
+					</form>
 				</table>
 			</div>
 		</div>

@@ -54,11 +54,16 @@
 						<th>Email</th>
 						<th>Type</th>
 						<th></th>
-						<th></th>
+						<?php if($_SESSION['type']<3) {
+
+						 ?><th>Change role</th><?php
+
+						} ?>
 					</tr>
 
 <?php
 		while($row = mysqli_fetch_array($run)) {
+			if($row['user_email'] != $_SESSION['user_email']) {
 
 					?>
 
@@ -73,22 +78,23 @@
 								<button type="submit" class="btn btn-warning">More</button>
 							</form>
 						</td>
+						<?php if($_SESSION['type']<3) { ?>
 						<td>
-							<form>
-							<select name="role" class="form-control" onfocus="hid('hidop<?php echo $row['id']; ?>')">
-								<option id="hidop<?php echo $row['id']; ?>">--Change Role--</option>
+							<form action="changerole.php" method="post">
+							<input type="text" name="id" value="<?php echo $row['id']; ?>" hidden>
+							<select name="role" class="form-control" style="min-width: 200px;">
 								<?php
 
-								$qry3 = "SELECT * FROM `user_type`";
-								$run3 = mysqli_query($conn,$qry3);
+								for($i=0;$i<5;$i++) {
+									if($i != $row['user_type']-1) {
+										if(!($i==0 and $_SESSION['type']!=1)) { 
+										?>
 
-								while($row3 = mysqli_fetch_array($run3)) {
-									if($row3['id']==$row['user_type']) 
-										continue;
-									?>
+								<option value="<?php echo $i+1; ?>"><?php echo $type[$i]; ?></option>
 
-								<option value="<?php echo $row['id']; ?>"><?php echo $row3['type']; ?></option>
-									<?php
+										<?php
+										}
+									}
 								}
 
 								?>
@@ -96,9 +102,10 @@
 							<button type="submit" class="btn btn-success">Go</button>
 						</form>
 						</td>
+						<?php } ?>
 					</tr>
 					<?php
-
+			}
 		}
 
 ?>
@@ -111,8 +118,8 @@
 				<form action="adduser.php" method="post" onsubmit="return valid()">
 					<input type="email" name="email" placeholder="Email" class="form-control" required>
 					<input type="password" name="password" placeholder="Password" class="form-control" required="">
-					<select name="user_type" class="form-control" onfocus="hid('hidop')" id="s1">
-						<option id="hidop" value="">--type--</option>
+					<select name="user_type" class="form-control" id="s1">
+						<option style="display: none;" value="">--type--</option>
 						<option value="5">Driver</option>
 						<option value="4">School Principal</option>
 						<?php	if($_SESSION["type"]<3) { ?>
@@ -139,13 +146,24 @@
 				if($_GET['m'] == 1) {
 					?>
 
-						$.notify("User added successfully.",{position:"right bottom",className:"success"});
+		$.notify("User added successfully.",{position:"right bottom",className:"success"});
 					<?php
 				}
-				else {
+				else if($_GET['m']==2) {
 					?>
-		$.notify("User addition failed \n for some reason.","error");
+		$.notify("User addition failed \n for some reason.",{position: "right bottom"});
 
+					<?php
+				}
+				else if($_GET['m']==3) {
+					?>
+
+		$.notify("User updated!",{position:"right bottom",className:"success"});
+					<?php
+				}
+				else if($_GET['m']==4) {
+					?>
+		$.notify("Couldn't update\nuser. Contact\nmaintenance");
 					<?php
 				}
 			}
