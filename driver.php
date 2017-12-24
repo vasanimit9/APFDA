@@ -101,3 +101,26 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  <?php
+    if(isset($_GET['m'])) {
+      if($_GET['m'] == 1) {
+        ?>
+        $.notify("Time Registered!",{position:"right bottom",className:"success"});
+        <?php
+      } else if($_GET['m']==2) {
+        ?>
+        $.notify("Time registeration \nfailed. Contact \nmaintenance",{position: "right bottom"});
+        <?php
+      } else if($_GET['m']==3) {
+        ?>
+        $.notify("Time Registered!",{position:"right bottom",className:"success"});
+        <?php
+      } else if($_GET['m']==4) {
+        ?>
+        $.notify("Time registeration \nfailed. Contact \nmaintenance",{position: "right bottom"});
+        <?php
+      }
+    }
+  ?>
+</script>
