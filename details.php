@@ -25,12 +25,13 @@
 		<br><br><br>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="changeuser.php" method="post">
 					<input type="text" name="id" value="<?php echo $_POST['uid'] ?>" hidden>
 					<table class="table table-responsive table-striped table-bordered">
 						<tr>
 							<th style="min-width: 250px;">Name</th>
 							<td style="min-width: 250px;"><input value="<?php echo $_POST['uname']; ?>" disabled class="form-control"></td>
+							<td></td>
+							<td></td>
 						</tr>
 
 						<?php
@@ -45,20 +46,28 @@
 							?>
 						<tr>
 							<th><?php echo $row['property_name']; ?></th>
-							<td><input type="text" value="<?php echo $row['property_value'] ?>" name="<?php echo $row['property_name']; ?>" class="form-control"></td>
+							<td style="min-width: 200px;">
+								<form action="changeuser.php" method="post">
+									<input type="text" name="id" value="<?php echo $id; ?>" hidden>
+									<input type="text" name="property_name" value="<?php echo $row['property_name']; ?>" hidden>
+									<input type="text" value="<?php echo $row['property_value']; ?>" name="property_value" class="form-control" required>
+							</td>
+							<td>
+									<button type="submit" class="btn btn-primary">Change</button>
+								</form>
+							</td>
+							<td>
+								<form action="deletemeta.php" method="post">
+									<input type="text" name="id" value="<?php echo $row['id'] ?>" hidden>
+									<button type="submit" class="btn btn-danger">Delete</button>
+								</form>
+							</td>
 						</tr>
 							<?php
 						}
 
 						?>
-						<tr>
-							<td></td>
-							<td>
-								<button type="submit" class="btn btn-primary">Change</button>
-							</td>
-						</tr>
 					</table>
-				</form>
 			</div>
 		</div>
 	</div>

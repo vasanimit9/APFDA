@@ -57,7 +57,9 @@
 						<th></th>
 						<?php if($_SESSION['type']<3) {
 
-						 ?><th>Change role</th><?php
+						 ?><th>Change role</th>
+						 <th></th>
+						 <?php
 
 						} ?>
 					</tr>
@@ -88,7 +90,7 @@
 
 								for($i=0;$i<5;$i++) {
 									if($i != $row['user_type']-1) {
-										if(!($i==0 and $_SESSION['type']!=1)) { 
+										if(!($i<2 and $_SESSION['type']!=1)) { 
 										?>
 
 								<option value="<?php echo $i+1; ?>"><?php echo $type[$i]; ?></option>
@@ -100,6 +102,8 @@
 
 								?>
 							</select>
+						</td>
+						<td>
 							<button type="submit" class="btn btn-success">Go</button>
 						</form>
 						</td>
