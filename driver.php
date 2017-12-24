@@ -1,10 +1,15 @@
+<?php
+  if(empty($_SESSION))
+    header("Location: ./");
+?>
+
 <div class="container">
   <br><br><br>
   <div class="row">
     <div class="col-xs-6 com-md-6">
 
 <?php
-  //routeDriver will be the property name of that particular user and the property value will be the route name
+  //routeDriver will be the property name of that particular user and the property value will be the route id
   $sql = "SELECT * FROM `users_meta` WHERE `user_id`='$_SESSION['id']' AND `property_name`='routeDriver'";
   $result = mysqli_query($conn, $sql);
   //Only one row/route should be the output of this querry.
@@ -24,31 +29,63 @@
       //loop to get the route
       while ($row2 = mysqli_fetch_assoc($result2)) {
         $school_id = $row2['school_id'];
-        //Splitting the school in an array of different ids.
+        //Splitting the school in an array of different ids. The school array taken from routes.
         $school_id_list = explode("," $school_id);
-        //To check if the school has had the food delivered or not, checking the schiil id list
-        //one by one
+        //
         $i = 0;
         //Edit ids and shit for the delivery time table change this from that to school table for names.
         while ($school_id_list[$i] != NULL) {
-          $school_id_list[$i] = $sil;
-          $sql3 = "SELECT * FROM `delivery_time_table` WHERE `school_id`='$sil'";
+          //Display school names from schools table using id.
+          $sil = $school_id_list[$i];
+          $sql3 = "SELECT * FROM `schools` WHERE `school_id`='$sil'";
           $result3 = mysqli_query($conn, $sql3);
           //Loop to check and display
           while ($row3 = mysqli_fetch_assoc($result3)) {
-            $deliveryTime = $row3['driver_ctime'];
-            if ($deliveryTime != NULL) {
+            $school_name = $row3['school_name'];
+            $sql4 = "SELECT * FROM `delivery_time_table` WHERE `school_id` ='$sil'";
+            $result4 = mysqli_query($conn, $sql4);
+            //When there are no records in the delivery time table for that particular school
+            //Then we add that record
+            if (mysqli_num_rows($result4) == 0) {
               ?>
               <tr>
-                <td><?php echo $row['school_id']; ?></td>
+                <td><?php echo $school_name; ?></td>
                 <td>
-                  <!-- what to do about the redirection? -->
-                  <form action="timestamp.php" method="post">
-                    <button type="submit" class="btn btn-warning" name="button">Delivered</button>
+                  <!-- what to do about the redirection - solved, just redirect again -->
+                  <form action="timestamp1.php" method="post">
+                    <!-- Making the first input readonly, hidden and send it to the form as school id -->
+                    <!-- nvm the above process was not required, it was stupid. -->
+                    <input type="hidden" name="school_id" value="<?php echo $sil ?>">
+                    <button type="submit" class="btn btn-warning" name="submit">Delivered</button>
                   </form>
                 </td>
               </tr>
               <?php
+              //When there is a record for that particular school
+            } elseif (mysqli_num_rows($result4) == 1) {
+              while ($row4 = mysqli_fetch_assoc($result4)) {
+                //To check if the the records found have driver ctime entered
+                if ($row4['driver_ctime'] == NULL) {
+                  ?>
+                  <tr>
+                    <td><?php echo $school_name; ?></td>
+                    <td>
+                      <!-- what to do about the redirection - solved, just redirect again -->
+                      <form action="timestamp2.php" method="post">
+                        <!-- Making the first input readonly, hidden and send it to the form as school id -->
+                        <!-- nvm the above process was not required, it was stupid. -->
+                        <input type="hidden" name="school_id" value="<?php echo $sil ?>">
+                        <button type="submit" class="btn btn-warning" name="submit">Delivered</button>
+                      </form>
+                    </td>
+                  </tr>
+                  <?php
+                } else {
+                  // I dont know why i made this either, i guess this is do nothing as well.
+                }
+              }
+            } else {
+              // Do Nothing, or something, i domt know why i made this else statement.
             }
           }
           $i += 1;

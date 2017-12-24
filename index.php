@@ -1,9 +1,9 @@
 <?php
-	
+
 	//carrying the session varaibles from other pages
 	session_start();
 
-	if(!isset($_SESSION['user_email'])) {
+	if(isset($_SESSION['user_email'])) {
 		header("Location: ./dashboard.php");
 	}
 
