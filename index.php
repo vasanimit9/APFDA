@@ -1,5 +1,5 @@
 <?php
-	
+
 	//carrying the session varaibles from other pages
 	session_start();
 
