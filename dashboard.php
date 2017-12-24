@@ -10,6 +10,19 @@
 	$html = new html("Dashboard");
 
 	include "navbar.php";
+?>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 align="center">Hare Krishna!</h3>
+		</div>
+	</div>
+</div>
+
+<?php
+
+
 	//Driver file added by Rohit, edit if necessary
 	if ($_SESSION['type'] == 5) {
 		include 'driver.php';

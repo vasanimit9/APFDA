@@ -22,7 +22,6 @@
 ?>
 
 	<div class="container">
-		<br><br><br>
 		<div class="row">
 			<div class="col-md-12">
 					<input type="text" name="id" value="<?php echo $_POST['uid'] ?>" hidden>
@@ -67,6 +66,36 @@
 						}
 
 						?>
+						<tr>
+							<form action="addproperty.php" method="post">
+							<td>
+								Add property:
+
+							</td>
+							<td>
+								<select name="property" class="form-control">
+									<?php
+
+									$qry2 = "SELECT * FROM `users_meta_meta`";
+									$run2 = mysqli_query($conn,$qry2);
+
+									while($row2 = mysqli_fetch_array($run2)) {
+										?>
+
+									<option value="<?php echo $row2["property"]; ?>"><?php echo $row2["property"]; ?></option>
+										<?php
+									}
+
+									?>
+								</select>
+								<input type="text" name="id" value="<?php echo $_POST['uid'] ?>" hidden>
+							</td>
+							<td>
+								<input type="text" name="property_value" class="form-control" placeholder="Value" style="min-width: 100px;">
+							</td>
+							<td><button type="submit" class="btn btn-primary">Add</button></td>
+							</form>
+						</tr>
 					</table>
 			</div>
 		</div>

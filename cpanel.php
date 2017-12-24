@@ -20,10 +20,6 @@
 ?>
 
 	<div class="container">
-		<br>
-		<br>
-		<br>
-
 		<div class="row">
 			<div class="col-md-9">
 				
@@ -135,7 +131,7 @@
 						<option value="1">SuperAdmin</option>
 						<?php } ?>
 					</select><br>
-					<button type="submit" class="btn btn-success form-control">Add</button>
+					<button type="submit" class="btn btn-primary form-control">Add</button>
 				</form>
 			</div>
 		</div>
