@@ -5,10 +5,10 @@
 	if(!isset($_SESSION['user_email'])) {
 		header("Location: ./");
 	}
-	else if($_SESSION['type']>3) {
+	elseif($_SESSION['type']>3) {
 		header("Location: ./");
 	}
-	else if(!isset($_POST['uname'])) {
+	elseif(!isset($_POST['uname'])) {
 		header("Location: ./cpanel.php");
 	}
 
@@ -78,7 +78,7 @@
 				?>
 
 		$.notify("Update failed.",{position:"right bottom"});
-				<?php				
+				<?php
 			}
 		}
 
