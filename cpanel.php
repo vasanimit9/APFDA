@@ -2,6 +2,8 @@
 	
 	session_start();
 
+	include "dbconnect.php";
+
 	if(!isset($_SESSION['user_email'])) {
 		header("Location: ./");
 	}
@@ -9,7 +11,6 @@
 		header("Location: ./dashboard.php");
 	}
 
-	include "dbconnect.php";
 	include "classes.php";
 
 	$html = new html("Admin Panel");
@@ -63,7 +64,7 @@
 
 <?php
 		while($row = mysqli_fetch_array($run)) {
-			if($row['user_email'] != $_SESSION['user_email']) {
+			if($row['user_email'] != $_SESSION['user_email'] and $row['user_type']!=1) {
 
 					?>
 

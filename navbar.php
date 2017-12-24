@@ -1,10 +1,10 @@
 
   <?php
-    if(empty($_SESSION))
-      header("Location: ./");
+    
+
   ?>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">A P F D A</a>
+    <a class="navbar-brand" href=".">A P F D A</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
@@ -16,7 +16,7 @@
           </li>
           <?php } ?>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Profile</a>
           </li>
           <li class="nav-item active" id="logout_phone">
             <a class="nav-link" href="./logout.php">Log out</a>
