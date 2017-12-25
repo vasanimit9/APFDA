@@ -38,7 +38,8 @@
         while (isset($school_id_list[$i]) != NULL) {
           //Display school names from schools table using id.
           $sil = $school_id_list[$i];
-          $sql3 = "SELECT * FROM `schools` WHERE `school_id`='$sil'";
+          //Changed school_id to id
+          $sql3 = "SELECT * FROM `schools` WHERE `id`='$sil'";
           $result3 = mysqli_query($conn, $sql3);
           //Loop to check and display
           while ($row3 = mysqli_fetch_assoc($result3)) {
