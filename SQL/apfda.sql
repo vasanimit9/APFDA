@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2017 at 11:22 AM
+-- Generation Time: Dec 25, 2017 at 07:51 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -30,10 +30,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `delivery_time_table` (
   `id` int(11) NOT NULL,
-  `driver_ctime` timestamp NULL DEFAULT NULL,
-  `principal_ctime` timestamp NULL DEFAULT NULL,
+  `deliveryDate` timestamp NULL DEFAULT NULL,
+  `driver_dTime` timestamp NULL DEFAULT NULL,
+  `principal_dTime` timestamp NULL DEFAULT NULL,
+  `principal_clashDate` timestamp NULL DEFAULT NULL,
   `school_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `delivery_time_table`
+--
+
+INSERT INTO `delivery_time_table` (`id`, `deliveryDate`, `driver_dTime`, `principal_dTime`, `principal_clashDate`, `school_id`) VALUES
+(1, NULL, NULL, NULL, NULL, 2),
+(2, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -157,7 +167,27 @@ CREATE TABLE `users_meta` (
 --
 
 INSERT INTO `users_meta` (`id`, `user_id`, `property_name`, `property_value`) VALUES
-(1, 2, 'routeDriver', '1');
+(1, 2, 'routeDriver', '1'),
+(4, 3, 'principalAt', 'aaa');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_meta_meta`
+--
+
+CREATE TABLE `users_meta_meta` (
+  `id` int(11) NOT NULL,
+  `property` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users_meta_meta`
+--
+
+INSERT INTO `users_meta_meta` (`id`, `property`) VALUES
+(1, 'principalAt'),
+(2, 'routeDriver');
 
 -- --------------------------------------------------------
 
@@ -227,7 +257,15 @@ ALTER TABLE `users`
 -- Indexes for table `users_meta`
 --
 ALTER TABLE `users_meta`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`,`property_name`);
+
+--
+-- Indexes for table `users_meta_meta`
+--
+ALTER TABLE `users_meta_meta`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `property` (`property`);
 
 --
 -- Indexes for table `user_type`
@@ -239,6 +277,12 @@ ALTER TABLE `user_type`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `delivery_time_table`
+--
+ALTER TABLE `delivery_time_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `taluka`
@@ -256,7 +300,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_meta`
 --
 ALTER TABLE `users_meta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `users_meta_meta`
+--
+ALTER TABLE `users_meta_meta`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_type`
