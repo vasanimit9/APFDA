@@ -1,3 +1,4 @@
+//When the record already exists, filled by the principal.
 <?php
 
   session_start();
@@ -13,9 +14,10 @@
   if (isset($_POST['submit'])) {
     $school_id = mysqli_real_escape_string($conn, $_POST['school_id']);
     date_default_timezone_set('Asia/Kolkata');
-    $driver_ctime = date('Y-m-d g:i:s');
+    $deliveryDate = date('Y-m-d');
+    $driver_dTime = date('g:i:s');
 
-    $sql = "UPDATE `delivery_time_table` SET `driver_ctime`='$driver_ctime' WHERE `school_id`='$school_id'";
+    $sql = "UPDATE `delivery_time_table` SET `deliveryDate`='$driver_dDate', `driver_dTime`='$driver_dTime' WHERE `school_id`='$school_id'";
 
     $result = mysqli_query($conn, $sql);
 
@@ -24,7 +26,7 @@
     } else {
       header("Location: ./dashboard.php?m=4");
     }
-    
+
   } else {
     header("Location: ./dashboard.php");
   }

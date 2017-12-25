@@ -10,3 +10,7 @@ that means either the driver or the school principal has entered the delivery ti
 the driver c time, if that is null then the school name will be displayed. If all this is false and the
 school name is not there in the delivery time table, then also the school will be displayed. In short the
 only time the school name will not be displayed is when the driver has entered the driver_ctime. (Rohit)
+
+EDIT: In drivers.php, first the school_id and date of delivery will be checked, and accordingly the data will
+be filled in the respective fields. If the date will be clashed b/w the driver and principal only then it will
+be reported to either of them.

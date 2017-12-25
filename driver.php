@@ -44,8 +44,13 @@
           //Loop to check and display
           while ($row3 = mysqli_fetch_assoc($result3)) {
             $school_name = $row3['school_name'];
-            $sql4 = "SELECT * FROM `delivery_time_table` WHERE `school_id` ='$sil'";
+            //Todays date to be used later
+            $today = date('Y-m-d');
+            //to get if the school id is there or not
+            $sql4 = "SELECT * FROM `delivery_time_table` WHERE `school_id`='$sil' AND `deliveryDate`='$today'";
+            $sql5 = "SELECT * FROM `delivery_time_table` WHERE `school_id`='$sil' AND `deliveryDate`!='$today'";
             $result4 = mysqli_query($conn, $sql4);
+            $result5 = mysqli_query($conn, $sql5);
             //When there are no records in the delivery time table for that particular school
             //Then we add that record
             if (mysqli_num_rows($result4) == 0) {
@@ -66,8 +71,8 @@
               //When there is a record for that particular school
             } elseif (mysqli_num_rows($result4) == 1) {
               while ($row4 = mysqli_fetch_assoc($result4)) {
-                //To check if the the records found have driver ctime entered
-                if ($row4['driver_ctime'] == NULL) {
+                //To check if the the records found have driver dtime entered
+                if ($row4['driver_dTime'] == NULL) {
                   ?>
                     <tr>
                       <td align="center"><?php echo $school_name; ?></td>
@@ -87,7 +92,31 @@
                 }
               }
             } else {
-              // Do Nothing, or something, i domt know why i made this else statement.
+              //Do nothing.
+            }
+            if (mysqli_num_rows($result5) > 0) {
+              while ($row5 = mysqli_fetch_assoc($result5)) {
+                if ($row5['driver_dTime'] == NULL) {
+                  ?>
+                    <tr>
+                      <td align="center"><?php echo $school_name; ?></td>
+                      <td align="center">
+                        <!-- what to do about the redirection - solved, just redirect again -->
+                        <form action="timestamp3.php" method="post">
+                          <!-- Making the first input readonly, hidden and send it to the form as school id -->
+                          <!-- nvm the above process was not required, it was stupid. -->
+                          <input type="hidden" name="school_id" value="<?php echo $sil ?>">
+                          <button type="submit" class="btn btn-warning" name="submit">Delivered</button>
+                        </form>
+                      </td>
+                    </tr>
+                  <?php
+                } else {
+                  //Do nothing.
+                }
+              }
+            } else {
+              //Dont really know what to do in here.
             }
           }
           $i = $i + 1;
