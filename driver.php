@@ -1,12 +1,14 @@
 <?php
   if(empty($_SESSION))
     header("Location: ./");
+    $schools = array();
+    $schoolsID = array();
 ?>
 
 <div class="container">
   <br>
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-6 table-responsive">
+    <div class="col-sm-6 col-md-6 table-responsive">
       <h5 align="center">Delivery Checkpost</h5>
       <br>
       <?php
@@ -22,7 +24,7 @@
           $sql2 = "SELECT * FROM `routes` WHERE `route_no`='$route_no'";
           $result2 = mysqli_query($conn, $sql2);
           ?>
-          <table class="table table-striped">
+          <table align="center" class="table table-striped">
             <tr>
               <td align="center"><strong>School List</strong></td>
               <td align="center"><strong>Delivery Status</strong></td>
@@ -57,13 +59,14 @@
                     ?>
                     <tr>
                       <td align="center"><?php echo $school_name; ?></td>
+                      <?php $schools[] = $school_name; $schoolsID[] = $sil; ?>
                       <td align="center">
                         <!-- what to do about the redirection - solved, just redirect again -->
                         <form action="timestamp1.php" method="post">
                           <!-- Making the first input readonly, hidden and send it to the form as school id -->
                           <!-- nvm the above process was not required, it was stupid. -->
                           <input type="hidden" name="school_id" value="<?php echo $sil ?>">
-                          <button type="submit" class="btn btn-warning" name="submit">Delivered</button>
+                          <button type="submit" class="btn btn-primary" name="submit">Delivered</button>
                         </form>
                       </td>
                     </tr>
@@ -82,7 +85,7 @@
                               <!-- Making the first input readonly, hidden and send it to the form as school id -->
                               <!-- nvm the above process was not required, it was stupid. -->
                               <input type="hidden" name="school_id" value="<?php echo $sil ?>">
-                              <button type="submit" class="btn btn-warning" name="submit">Delivered</button>
+                              <button type="submit" class="btn btn-primary" name="submit">Delivered</button>
                             </form>
                           </td>
                         </tr>
@@ -91,10 +94,7 @@
                         // I dont know why i made this either, i guess this is do nothing as well.
                       }
                     }
-                  } else {
-                    //Do nothing.
-                  }
-                  if (mysqli_num_rows($result5) > 0) {
+                  } elseif (mysqli_num_rows($result5) > 0) {
                     while ($row5 = mysqli_fetch_assoc($result5)) {
                       if ($row5['driver_dTime'] == NULL) {
                         ?>
@@ -106,7 +106,7 @@
                               <!-- Making the first input readonly, hidden and send it to the form as school id -->
                               <!-- nvm the above process was not required, it was stupid. -->
                               <input type="hidden" name="school_id" value="<?php echo $sil ?>">
-                              <button type="submit" class="btn btn-warning" name="submit">Delivered</button>
+                              <button type="submit" class="btn btn-primary" name="submit">Delivered</button>
                             </form>
                           </td>
                         </tr>
@@ -131,16 +131,74 @@
         }
         ?>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-6">
+    <div class="col-sm-6 col-md-6">
       <h5 align="center">Requirement Feedback</h3>
-        <form action="requirement.php" method="post">
+        <form action="requirement.php" method="post" onsubmit="return validate()">
           <br>
-          <div align="center">
-            <select class="custom-select col-xs-6 col-sm-6 col-md-6">
-              <option selected>Select School</option>
-              <option value="<?php ?>">One</option>
-            </select>
-          </div>
+          <div class="row justify-content-center">
+              <div class="col-sm-9 col-md-9">
+                <select class="custom-select form-control" id="select">
+                  <option style="display: none;" selected value="">Select School</option>
+                  <?php
+                  $i = 0;
+                  while ($schools[$i] != NULL) {
+                    $name = $schools[$i];
+                    $id = $schoolsID[$i];
+                  ?>
+                  <option value="<?php echo $id ?>"><?php echo $name; ?></option>
+                  <?php $i = $i +1; } ?>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <label class="col-form-label" for="select1">Rice</label>
+              <div class="col-md-5 col-sm-5">
+                <select class="custom-select form-control" id="select1">
+                  <option style="display: none;" selected value="">Vessel Size</option>
+                  <option value="s">Small</option>
+                  <option value="m">Medium</option>
+                  <option value="l">Large</option>
+                </select>
+              </div>
+              <div class="col-md-5 col-sm-5">
+                <input type="number" class="form-control" min="1" max="6" placeholder="Number of vessels">
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <label class="col-form-label" for="select2">Dal</label>
+              <div class="col-md-5 col-sm-5">
+                <select class="custom-select form-control" id="select2">
+                  <option style="display: none;" selected value="">Vessel Size</option>
+                  <option value="s">Small</option>
+                  <option value="m">Medium</option>
+                  <option value="l">Large</option>
+                </select>
+              </div>
+              <div class="col-md-5 col-sm-5">
+                <input type="number" class="form-control" min="1" max="6" placeholder="Number of vessels">
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <label class="col-form-label" for="select3">Roti</label>
+              <div class="col-md-5 col-sm-5">
+                <select class="custom-select form-control" id="select3">
+                  <option style="display: none;" selected value="">Vessel Size</option>
+                  <option value="s">Small</option>
+                  <option value="m">Medium</option>
+                  <option value="l">Large</option>
+                </select>
+              </div>
+              <div class="col-md-5 col-sm-5">
+                <input type="number" class="form-control" min="1" max="6" placeholder="Number of vessels">
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <input class="btn btn-success col-sm-6 col-md-6 form-control" type="submit" name="submit" value="Send">
+            </div>
         </form>
     </div>
   </div>
@@ -167,4 +225,21 @@
       }
     }
   ?>
+  function validate() {
+    if($("#select").val() == "") {
+      $.notify("Select school\nbefore submission. ", {position: "right bottom"});
+      return false;
+    } else if ($("#select1").val() == "") {
+      $.notify("Select vessel\nbefore submission. ", {position: "right bottom"});
+      return false;
+    } else if ($("#select2").val() == "") {
+      $.notify("Select vessel\nbefore submission. ", {position: "right bottom"});
+      return false;
+    } else if ($("#select3").val() == "") {
+      $.notify("Select vessel\nbefore submission. ", {position: "right bottom"});
+      return false;
+    } else {
+      return true;
+    }
+  }
 </script>
