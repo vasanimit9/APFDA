@@ -4,9 +4,11 @@
 ?>
 
 <div class="container">
-  <br><br>
+  <br>
   <div class="row">
-    <div class="col-xs-6 col-md-6 table-responsive">
+    <div class="col-xs-6 col-sm-6 col-md-6 table-responsive">
+      <h5 align="center">Delivery Checkpost</h5>
+      <br>
       <?php
       //routeDriver will be the property name of that particular user and the property value will be the route id
       $id = $_SESSION['id'];
@@ -121,10 +123,25 @@
               }
             }
           }
+          ?>
+          </table>
+          <?php
         } else {
           echo "Something Went wrong, please inform the maintenence team.";
         }
         ?>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <h5 align="center">Requirement Feedback</h3>
+        <form action="requirement.php" method="post">
+          <br>
+          <div align="center">
+            <select class="custom-select col-xs-6 col-sm-6 col-md-6">
+              <option selected>Select School</option>
+              <option value="<?php ?>">One</option>
+            </select>
+          </div>
+        </form>
     </div>
   </div>
 </div>
