@@ -11,18 +11,20 @@
 		header("Location: ./dashboard.php");
 	}
 
-	include "classes.php";
-
-	$html = new html("Admin Panel");
-
-	include "navbar.php";
-
 	if(!isset($_GET['page'])) {
 		$page = 1;
 	}
 	else {
 		$page = $_GET['page'];
+		if($page < 1)
+			header("Location: ./cpanel.php?page=1");
 	}
+
+	include "classes.php";
+
+	$html = new html("Admin Panel");
+
+	include "navbar.php";
 
 	$str = "LIMIT ".(($page-1)*20).", 20";
 
@@ -31,7 +33,31 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
-				
+				<form action="filter.php" method="get" class="row">
+					<div class="col-md-6">
+						<select name="type" class="form-control">
+							<option value="" style="display: none;">-- Filter by User Type--</option>
+							<?php
+
+							if($_SESSION['type']==1) {
+								?>
+
+							<option value="2">Admin</option>
+
+								<?php
+							}
+
+							?>
+							<option value="3">Executive</option>
+							<option value="4">School Principal</option>
+							<option value="5">Driver</option>
+						</select>
+					</div>
+					<div class="col-md-6">
+						<button class="btn btn-primary" type="submit">Go</button>
+					</div>
+				</form>
+				<br>
 <?php
 
 
@@ -56,14 +82,14 @@
 
 				<table class="table table-responsive table-striped">
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Type</th>
-						<th></th>
+						<th style="min-width: 100px">Name</th>
+						<th style="min-width: 100px">Email</th>
+						<th style="min-width: 100px">Type</th>
+						<th style="min-width: 50px"></th>
 						<?php if($_SESSION['type']<3) {
 
-						 ?><th>Change role</th>
-						 <th></th>
+						 ?><th style="min-width: 100px">Change role</th>
+						 <th style="min-width: 50px"></th>
 						 <?php
 
 						} ?>
@@ -123,15 +149,19 @@
 
 				</table>
 
-				<div class="col-md-4">
-					<form action="cpanel.php">
+				<form action="cpanel.php" class="row">
+
+				<div class="col-md-6">
 						<input type="number" name="page" class="form-control" placeholder="Go to page">
-						<button type="submit" class="btn btn-primary">Go</button>
-					</form>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
+						<button type="submit" class="btn btn-primary">Go</button>
+				</div>
+				<div class="col-md-3">
 					<a href="cpanel.php?page=<?php echo $page+1; ?>" class="btn btn-success">Next</a>
 				</div>
+				</form>
+				
 
 			</div>
 			<div class="col-md-3" style="text-align: center;">
