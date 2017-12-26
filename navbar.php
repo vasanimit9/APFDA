@@ -7,7 +7,7 @@
         <ul class="navbar-nav mr-auto">
           <?php if ($_SESSION['type'] < 4) { ?>
           <li class="nav-item active">
-            <a class="nav-link" href="./cpanel.php">Admin Panel</a>
+            <a class="nav-link" href="./cpanel.php?page=1">Admin Panel</a>
           </li>
           <?php } ?>
           <li class="nav-item active">
@@ -32,4 +32,4 @@
       });
     </script>
 
-    <br><br>
+    <br><br><br>

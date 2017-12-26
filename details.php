@@ -76,7 +76,9 @@
 								<select name="property" class="form-control">
 									<?php
 
-									$qry2 = "SELECT * FROM `users_meta_meta`";
+									$tp = $_POST['type'];
+
+									$qry2 = "SELECT * FROM `users_meta_meta` WHERE `type` = '$tp'";
 									$run2 = mysqli_query($conn,$qry2);
 
 									while($row2 = mysqli_fetch_array($run2)) {

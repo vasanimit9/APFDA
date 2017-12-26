@@ -17,6 +17,15 @@
 
 	include "navbar.php";
 
+	if(!isset($_GET['page'])) {
+		$page = 1;
+	}
+	else {
+		$page = $_GET['page'];
+	}
+
+	$str = "LIMIT ".(($page-1)*20).", 20";
+
 ?>
 
 	<div class="container">
@@ -27,7 +36,7 @@
 
 
 		//initializing query for fetching users from the database
-		$qry = "SELECT * FROM `users`";
+		$qry = "SELECT * FROM `users` ".$str;
 		$run = mysqli_query($conn,$qry);
 
 		//initializing and executing query for displaying and using user types
@@ -74,12 +83,13 @@
 							<form action="details.php" method="post">
 								<input type="text" name="uname" value="<?php echo $row['name'];  ?>" hidden>
 								<input type='text' value="<?php echo $row['id']; ?>" name="uid" hidden>
+								<input type="text" name="type" value="<?php echo $row['user_type']; ?>" hidden>
 								<button type="submit" class="btn btn-warning">More</button>
 							</form>
 						</td>
 						<?php if($_SESSION['type']<3) { ?>
+						<form action="changerole.php" method="post">
 						<td>
-							<form action="changerole.php" method="post">
 							<input type="text" name="id" value="<?php echo $row['id']; ?>" hidden>
 							<select name="role" class="form-control" style="min-width: 200px;">
 								<?php
@@ -112,6 +122,16 @@
 ?>
 
 				</table>
+
+				<div class="col-md-4">
+					<form action="cpanel.php">
+						<input type="number" name="page" class="form-control" placeholder="Go to page">
+						<button type="submit" class="btn btn-primary">Go</button>
+					</form>
+				</div>
+				<div class="col-md-4">
+					<a href="cpanel.php?page=<?php echo $page+1; ?>" class="btn btn-success">Next</a>
+				</div>
 
 			</div>
 			<div class="col-md-3" style="text-align: center;">
