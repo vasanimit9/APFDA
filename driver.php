@@ -135,7 +135,7 @@
       <h5 align="center">Requirement Feedback</h3>
         <form action="requirement.php" method="post" onsubmit="return validate()">
           <br>
-          <div class="row justify-content-center">
+            <div class="row justify-content-center">
               <div class="col-sm-9 col-md-9">
                 <select class="custom-select form-control" id="select">
                   <option style="display: none;" selected value="">Select School</option>
@@ -153,46 +153,127 @@
             <br>
             <div class="row justify-content-center">
               <label class="col-form-label" for="select1">Rice</label>
-              <div class="col-md-5 col-sm-5">
-                <select class="custom-select form-control" id="select1">
-                  <option style="display: none;" selected value="">Vessel Size</option>
-                  <option value="s">Small</option>
-                  <option value="m">Medium</option>
-                  <option value="l">Large</option>
+              <div class="col-sm-8 col-md-8">
+                <select class="custom-select form-control" name="selectRice" id="select1">
+                  <option style="display: none;" selected value="">Open this select menu</option>
+                  <option value="rice">Rice</option>
+                  <option value="jRice">Jeera Rice</option>
+                  <option value="khichdi">Khichdi</option>
+                  <option value="mPulav">Mutter Pulav</option>
+                  <option value="vPulav">Veg. Pulav</option>
                 </select>
               </div>
-              <div class="col-md-5 col-sm-5">
-                <input type="number" class="form-control" min="1" max="6" placeholder="Number of vessels">
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <!-- <label class="col-form-label" for="ris">Small</label> -->
+              <div class="col-md-3 col-sm-3">
+                <input type="text" style="border: none;" readonly name="ris" value="Small">
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <input type="number" id="ris" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <!-- <label class="col-form-label" for="rim">Medium</label> -->
+              <div class="col-md-3 col-sm-3">
+                <input type="text" style="border: none;" readonly name="rim" value="Medium">
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <input type="number" id="rim" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <!-- <label class="col-form-label" for="ril">Large</label> -->
+              <div class="col-md-3 col-sm-3">
+                <input type="text" style="border: none;" readonly name="ril" value="Large">
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <input type="number" id="ril" class="form-control" min="1" max="6" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
             <div class="row justify-content-center">
               <label class="col-form-label" for="select2">Dal</label>
-              <div class="col-md-5 col-sm-5">
-                <select class="custom-select form-control" id="select2">
-                  <option style="display: none;" selected value="">Vessel Size</option>
-                  <option value="s">Small</option>
-                  <option value="m">Medium</option>
-                  <option value="l">Large</option>
+              <div class="col-sm-8 col-md-8">
+                <select class="custom-select form-control" name="selectDal" id="select2">
+                  <option style="display: none;" selected value="">Select Dal/Sabji</option>
+                  <option value="dal">Dal</option>
+                  <option value="sabji">Sabji</option>
                 </select>
               </div>
-              <div class="col-md-5 col-sm-5">
-                <input type="number" class="form-control" min="1" max="6" placeholder="Number of vessels">
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <!-- <label class="col-form-lable" for="das">Small</label> -->
+              <div class="col-md-3 col-sm-3">
+                <input type="text" style="border: none;" readonly name="das" value="Small">
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <input type="number" id="das" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <!-- <label class="col-form-lable" for="dam">Medium</label> -->
+              <div class="col-md-3 col-sm-3">
+                <input type="text" style="border: none;" readonly name="dam" value="Medium">
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <input type="number" id="dam" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <!-- <label class="col-form-lable" for="dal">Large</label> -->
+              <div class="col-md-3 col-sm-3">
+                <input type="text" style="border: none;" readonly name="dal" value="Large">
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <input type="number" id="dal" class="form-control" min="1" max="6" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
             <div class="row justify-content-center">
               <label class="col-form-label" for="select3">Roti</label>
-              <div class="col-md-5 col-sm-5">
-                <select class="custom-select form-control" id="select3">
-                  <option style="display: none;" selected value="">Vessel Size</option>
-                  <option value="s">Small</option>
-                  <option value="m">Medium</option>
-                  <option value="l">Large</option>
+              <div class="col-sm-8 col-md-8">
+                <select class="custom-select form-control" name="selectRoti" id="select3">
+                  <option style="display: none;" selected value="">Select Roti Type</option>
+                  <option value="roti">Roti</option>
+                  <option value="thepla">Thepla</option>
                 </select>
               </div>
-              <div class="col-md-5 col-sm-5">
-                <input type="number" class="form-control" min="1" max="6" placeholder="Number of vessels">
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <!-- <label class="col-form-lable" for="ros">Small</label> -->
+              <div class="col-md-3 col-sm-3">
+                <input type="text" style="border: none;" readonly name="ros" value="Small">
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <input type="number" id="ros" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <!-- <label class="col-form-lable" for="rom">Medium</label> -->
+              <div class="col-md-3 col-sm-3">
+                <input type="text" style="border: none;" readonly name="rom" value="Medium">
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <input type="number" id="rom" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+              </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+              <!-- <label class="col-form-lable" for="rol">Large</label> -->
+              <div class="col-md-3 col-sm-3">
+                <input type="text" style="border: none;" readonly name="rol" value="Large">
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <input type="number" id="rol" class="form-control" min="1" max="6" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
@@ -230,13 +311,13 @@
       $.notify("Select school\nbefore submission. ", {position: "right bottom"});
       return false;
     } else if ($("#select1").val() == "") {
-      $.notify("Select vessel\nbefore submission. ", {position: "right bottom"});
+      $.notify("Select rice type\nbefore submission. ", {position: "right bottom"});
       return false;
     } else if ($("#select2").val() == "") {
-      $.notify("Select vessel\nbefore submission. ", {position: "right bottom"});
+      $.notify("Select dal/sabji\nbefore submission. ", {position: "right bottom"});
       return false;
     } else if ($("#select3").val() == "") {
-      $.notify("Select vessel\nbefore submission. ", {position: "right bottom"});
+      $.notify("Select roti/thepla\nbefore submission. ", {position: "right bottom"});
       return false;
     } else {
       return true;
