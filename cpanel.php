@@ -1,5 +1,5 @@
 <?php
-	
+
 	session_start();
 
 	include "dbconnect.php";
@@ -122,7 +122,7 @@
 
 								for($i=0;$i<5;$i++) {
 									if($i != $row['user_type']-1) {
-										if(!($i<2 and $_SESSION['type']!=1)) { 
+										if(!($i<2 and $_SESSION['type']!=1)) {
 										?>
 
 								<option value="<?php echo $i+1; ?>"><?php echo $type[$i]; ?></option>
@@ -161,7 +161,7 @@
 					<a href="cpanel.php?page=<?php echo $page+1; ?>" class="btn btn-success">Next</a>
 				</div>
 				</form>
-				
+
 
 			</div>
 			<div class="col-md-3" style="text-align: center;">

@@ -22,9 +22,9 @@
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-      header("Location: ./dashboard.php?m=3");
+      header("Location: ./dashboard.php?m=1");
     } else {
-      header("Location: ./dashboard.php?m=4");
+      header("Location: ./dashboard.php?m=2");
     }
 
   } else {

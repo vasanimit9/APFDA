@@ -14,3 +14,9 @@ only time the school name will not be displayed is when the driver has entered t
 EDIT: In drivers.php, first the school_id and date of delivery will be checked, and accordingly the data will
 be filled in the respective fields. If the date will be clashed b/w the driver and principal only then it will
 be reported to either of them.
+
+The date in the requirements table is the date when he has entered the record, for the next scheduled delivery.
+The format for the next day order will be like, 1 s 0 m 0 l [Rice type id], then the other two columns similarly for
+other food items.
+
+time format: y-m-d
