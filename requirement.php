@@ -20,14 +20,46 @@
     $qros = mysqli_real_escape_string($conn, $_POST['qros']);
     $qrom = mysqli_real_escape_string($conn, $_POST['qrom']);
     $qrol = mysqli_real_escape_string($conn, $_POST['qrol']);
+    $y = mysqli_real_escape_string($conn, $_POST['cYear']);
+    $m = mysqli_real_escape_string($conn, $_POST['cMonth']);
+    $d = mysqli_real_escape_string($conn, $_POST['cDate']);
     $driver_id = $_SESSION['id'];
     $routeNo = mysqli_real_escape_string($conn, $_POST['routeNo']);
-    //Tommorow edit, almost done, use localtime, date time showing GMT
-    date_default_timezone_set('Asia/Kolkata');
-    $datetime = new DateTime('tomorrow');
-    $tommorow = $datetime->format('Y-m-d');
-    $datetime = new DateTime();
-    $today = $datetime->format('Y-m-d');
+
+    //To check if the custom date is standardized
+    //$y==0 || $m==0 || $d==0 || ($m==2 && $d>29) || ($m==4 && $d>30) || ($m==6 && $d>30) || ($m==9 && $d>30) || ($m==11 && $d>30)
+    if ($y==0 && $m==0 && $d==0) {
+      //Tommorow edit, almost done, use localtime, date time showing GMT
+      date_default_timezone_set('Asia/Kolkata');
+      $datetime = new DateTime();
+      $today = $datetime->format('Y-m-d');
+      $to_day = $datetime->format('l');
+
+      if ($to_day == "Saturday") {
+        $datetime = new DateTime('tomorrow+1day');
+        $tommorow = $datetime->format('Y-m-d');
+      } else {
+        $datetime = new DateTime('tomorrow');
+        $tommorow = $datetime->format('Y-m-d');
+      }
+    } elseif ($y==0 || $m==0 || $d==0 || ($m==2 && $d>29) || ($m==4 && $d==31) || ($m==6 && $d==31) || ($m==9 && $d==31) || ($m==11 && $d==31)) {
+      header("Location: ./dashboard.php?m=5");
+    } else {
+      
+    }
+
+    $sql4 = "SELECT * FROM `holidays` WHERE `date`='$tommorow' AND `school_id`='$school_id'";
+    $result4 = mysqli_query($conn, $sql4);
+    $x = 0;
+
+    while (mysqli_num_rows($result4) != 0) {
+      $x = $x + 1;
+      $datetime = new DateTime('tomorrow+'.$x.'day');
+      $tommorow = $datetime->format('Y-m-d');
+      $sql4 = "SELECT * FROM `holidays` WHERE `date`='$tommorow' AND `school_id`='$school_id'";
+      $result4 = mysqli_query($conn, $sql4);
+    }
+
     $rice = $qris.' S '.$qrim.' M '. $qril.' L ';
     $dal = $qris.' S '.$qrim.' M '. $qril.' L ';
     $roti = $qris.' S '.$qrim.' M '. $qril.' L ';
@@ -51,8 +83,7 @@
       } else {
         header("Location: ./dashboard.php?m=4");
       }
-    }
-  } else {
+    } else {
     //Nothing
   }
 ?>
