@@ -23,6 +23,7 @@
     $driver_id = $_SESSION['id'];
     $routeNo = mysqli_real_escape_string($conn, $_POST['routeNo']);
     //Tommorow edit, almost done, use localtime, date time showing GMT
+    date_default_timezone_set('Asia/Kolkata');
     $datetime = new DateTime('tomorrow');
     $tommorow = $datetime->format('Y-m-d');
     $datetime = new DateTime();
