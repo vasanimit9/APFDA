@@ -374,23 +374,23 @@
     if(isset($_GET['m'])) {
       if($_GET['m'] == 1) {
         ?>
-        $.notify("Time Registered!",{position:"left bottom",className:"success"});
+        $.notify("Time Registered!", {position:"left bottom",className:"success"});
         <?php
       } elseif($_GET['m'] == 2) {
         ?>
-        $.notify("Time registeration \nfailed. Contact \nmaintenance",{position: "left bottom"});
+        $.notify("Time registeration \nfailed. Contact \nmaintenance", {position: "left bottom"});
         <?php
       } elseif($_GET['m'] == 3) {
         ?>
-        $.notify("Feedback Recieved!",{position:"right bottom",className:"success"});
+        $.notify("Feedback Recieved!", {position:"right bottom",className:"success"});
         <?php
       } elseif($_GET['m'] == 4) {
         ?>
-        $.notify("Foodback failed. \nContact maintenance.",{position: "right bottom"});
+        $.notify("Foodback failed. \nContact maintenance.", {position: "right bottom"});
         <?php
-      } elseif ($_GET['m'] == 5) {
+      } elseif($_GET['m'] == 5) {
         ?>
-        $.notify("Incorrect Date Format.",{position: "right bottom"});
+        $.notify("Incorrect Date Format.", {position: "right bottom"});
         <?php
       }
     }
@@ -422,7 +422,6 @@
   //   }
   // }
 
-<<<<<<< HEAD
   $(document).ready(function(){
     $("#customDate").click(function(){
         $("#date").toggle();
@@ -446,7 +445,4 @@
   //     document.getElementById("customDate").innerHTML = "Use custom date";
   //   }
   // }
-=======
-
->>>>>>> 252a60c3b2acea5893768a45f9056dae456d1639
 </script>
