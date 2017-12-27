@@ -302,6 +302,23 @@
   </div>
 </div>
 <script type="text/javascript">
+  function ajax_date() {
+    if(document.getElementById("date").innerHTML == "") {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+         document.getElementById("date").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "date.php", true);
+      xhttp.send();
+      document.getElementById("customDate").innerHTML = "Use today's date";
+    }
+    else {
+      document.getElementById("date").innerHTML = "";
+      document.getElementById("customDate").innerHTML = "Use custom date";
+    }
+  }
   <?php
     if(isset($_GET['m'])) {
       if($_GET['m'] == 1) {
@@ -314,11 +331,11 @@
         <?php
       } else if($_GET['m']==3) {
         ?>
-        $.notify("Foodback Recieved!",{position:"right bottom",className:"success"});
+        $.notify("Feedback Recieved!",{position:"right bottom",className:"success"});
         <?php
       } else if($_GET['m']==4) {
         ?>
-        $.notify("Foodback failed. \nContact maintenance",{position: "right bottom"});
+        $.notify("Feedback failed. \nContact maintenance",{position: "right bottom"});
         <?php
       }
     }
@@ -338,7 +355,7 @@
       return false;
     } else {
       return true;
-    }
+    } 
   }
   // function checkboxCheck() {
   //   if ($("#customDate").val() == "on") {
@@ -350,21 +367,5 @@
   //   }
   // }
 
-  function ajax_date() {
-    if(document.getElementById("date").innerHTML == "") {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-         document.getElementById("date").innerHTML = this.responseText;
-        }
-      };
-      xhttp.open("GET", "date.txt", true);
-      xhttp.send();
-      document.getElementById("customDate").innerHTML = "Use today's date";
-    }
-    else {
-      document.getElementById("date").innerHTML = "";
-      document.getElementById("customDate").innerHTML = "Use custom date";
-    }
-  }
+
 </script>
