@@ -33,9 +33,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
-				<form action="filter.php" method="get" class="row">
+
+				<!-- The form for filtering users on the basis of user type -->
+				<form action="filter.php" method="get" class="row" onsubmit="return validate3()">
 					<div class="col-md-6">
-						<select name="type" class="form-control">
+						<select name="type" class="form-control" id="type1">
 							<option value="" style="display: none;">-- Filter by User Type--</option>
 							<?php
 
@@ -58,6 +60,11 @@
 					</div>
 				</form>
 				<br>
+
+				<!-- end form -->
+
+				<!-- The table for the list of users -->
+
 <?php
 
 
@@ -103,17 +110,20 @@
 
 					<tr>
 						<td><?php echo $row['name']; ?></td>
-						<td><?php echo $row['user_email']; ?></td>
+						<td style="font-family: Times New Roman;"><?php echo $row['user_email']; ?></td>
 						<td><?php echo $type[$row['user_type']-1]; ?></td>
 						<td>
+							<!-- the form to go to the details page of this user -->
 							<form action="details.php" method="post">
 								<input type="text" name="uname" value="<?php echo $row['name'];  ?>" hidden>
 								<input type='text' value="<?php echo $row['id']; ?>" name="uid" hidden>
 								<input type="text" name="type" value="<?php echo $row['user_type']; ?>" hidden>
 								<button type="submit" class="btn btn-warning">More</button>
 							</form>
+							<!-- end form -->
 						</td>
 						<?php if($_SESSION['type']<3) { ?>
+						<!-- form for admins and superadmin to change the role or type of this user -->
 						<form action="changerole.php" method="post">
 						<td>
 							<input type="text" name="id" value="<?php echo $row['id']; ?>" hidden>
@@ -138,6 +148,7 @@
 						<td>
 							<button type="submit" class="btn btn-success">Go</button>
 						</form>
+						<!-- end form -->
 						</td>
 						<?php } ?>
 					</tr>
@@ -148,6 +159,11 @@
 ?>
 
 				</table>
+				<!-- end table -->
+
+
+
+				<!-- form for selecting page number - one page shows 20 records at the most -->
 
 				<form action="cpanel.php" class="row">
 
@@ -161,10 +177,16 @@
 					<a href="cpanel.php?page=<?php echo $page+1; ?>" class="btn btn-success">Next</a>
 				</div>
 				</form>
+				 <!-- end form -->
 				
 
 			</div>
+
+
+
 			<div class="col-md-3" style="text-align: center;">
+
+				<!-- form to add a user for executives, admins and the superadmin -->
 				<h3>Add User</h3>
 				<form action="adduser.php" method="post" onsubmit="return valid()">
 					<input type="email" name="email" placeholder="Email" class="form-control" required>
@@ -183,6 +205,7 @@
 					</select><br>
 					<button type="submit" class="btn btn-primary form-control">Add</button>
 				</form>
+				<!-- end form -->
 			</div>
 		</div>
 
@@ -191,6 +214,12 @@
 	<script type="text/javascript">
 		function hid(x) {
 			$("#"+x).css("display","none");
+		}
+		function validate3() {
+			if($("#type1").val() == "") {
+				$.notify("Select a type.");
+				return false;
+			}
 		}
 		<?php
 			if(isset($_GET['m'])) {

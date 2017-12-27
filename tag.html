@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<span id="span1"></span>
+	<button id="btn1" onclick="tog()">Go</button>
+	<script type="text/javascript">
+		function tog() {
+			if(document.getElementById("span1").innerHTML == "") {
+				document.getElementById("span1").innerHTML += "<input type='text'>";	
+			}
+			else {
+				document.getElementById("span1").innerHTML = "";
+			}
+		}
+	</script>
+</body>
+</html>
