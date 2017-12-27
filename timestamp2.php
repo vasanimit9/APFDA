@@ -17,7 +17,7 @@
     $deliveryDate = date('Y-m-d');
     $driver_dTime = date('g:i:s');
 
-    $sql = "UPDATE `delivery_time_table` SET `deliveryDate`='$driver_dDate', `driver_dTime`='$driver_dTime' WHERE `school_id`='$school_id'";
+    $sql = "UPDATE `delivery_time_table` SET `deliveryDate`='$deliveryDate', `driver_dTime`='$driver_dTime' WHERE `school_id`='$school_id'";
 
     $result = mysqli_query($conn, $sql);
 

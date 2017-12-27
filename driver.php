@@ -67,12 +67,81 @@
                       <?php $schools[] = $school_name; $schoolsID[] = $sil; ?>
                       <td align="center">
                         <!-- what to do about the redirection - solved, just redirect again -->
-                        <form action="timestamp1.php" method="post">
-                          <!-- Making the first input readonly, hidden and send it to the form as school id -->
-                          <!-- nvm the above process was not required, it was stupid. -->
-                          <input type="hidden" name="school_id" value="<?php echo $sil ?>">
-                          <button type="submit" class="btn btn-primary" name="submit">Delivered</button>
-                        </form>
+                        <!-- <form action="timestamp1.php" method="post"> -->
+                        <!-- Making the first input readonly, hidden and send it to the form as school id -->
+                        <!-- nvm the above process was not required, it was stupid. -->
+
+                        <!-- <button type="submit" class="btn btn-primary" name="submit">Delivered</button> -->
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" name="mod_btn">Delivery</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Delivery Requirements</h5>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+                              <div class="modal-body">
+                                <!-- <p>Sample text in the modal for testing.</p> -->
+                                <?php
+                                $sql6 = "SELECT * FROM `food_qty_deliver` WHERE `school_id`='$sil' AND `deliveryDate`='$today'";
+                                $result6 = mysqli_query($conn, $sql6);
+
+                                while ($row6 = mysqli_fetch_assoc($result6)) {
+                                  $ris = $row6['ris'];
+                                  $rim = $row6['rim'];
+                                  $ril = $row6['ril'];
+                                  $das = $row6['das'];
+                                  $dam = $row6['dam'];
+                                  $dal = $row6['dal'];
+                                  $ros = $row6['ros'];
+                                  $rom = $row6['rom'];
+                                  $rol = $row6['rol'];
+                                }
+                                ?>
+                                <table align="center" class="table table-striped">
+                                  <tr>
+                                    <td align="center"><strong>Item</strong></td>
+                                    <td align="center"><strong>Small</strong></td>
+                                    <td align="center"><strong>Medium</strong></td>
+                                    <td align="center"><strong>Large</strong></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="center"><strong>Rice</strong></td>
+                                    <td align="center"><?php echo "$ris"; ?></td>
+                                    <td align="center"><?php echo "$rim"; ?></td>
+                                    <td align="center"><?php echo "$ril"; ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="center"><strong>Dal</strong></td>
+                                    <td align="center"><?php echo "$das"; ?></td>
+                                    <td align="center"><?php echo "$dam"; ?></td>
+                                    <td align="center"><?php echo "$dal"; ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="center"><strong>Roti</strong></td>
+                                    <td align="center"><?php echo "$ros"; ?></td>
+                                    <td align="center"><?php echo "$rom"; ?></td>
+                                    <td align="center"><?php echo "$rol"; ?></td>
+                                  </tr>
+                                </table>
+                              </div>
+                              <div class="modal-footer">
+                                <form action="timestamp1.php" method="post">
+                                  <input type="hidden" name="school_id" value="<?php echo $sil ?>">
+                                  <button type="submit" class="btn btn-success" name="submit">Delivered</button>
+                                </form>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <!-- </form> -->
                       </td>
                     </tr>
                     <?php
@@ -86,12 +155,80 @@
                           <td align="center"><?php echo $school_name; ?></td>
                           <td align="center">
                             <!-- what to do about the redirection - solved, just redirect again -->
-                            <form action="timestamp2.php" method="post">
-                              <!-- Making the first input readonly, hidden and send it to the form as school id -->
-                              <!-- nvm the above process was not required, it was stupid. -->
-                              <input type="hidden" name="school_id" value="<?php echo $sil ?>">
-                              <button type="submit" class="btn btn-primary" name="submit">Delivered</button>
-                            </form>
+                            <!-- <form action="timestamp2.php" method="post"> -->
+                            <!-- Making the first input readonly, hidden and send it to the form as school id -->
+                            <!-- nvm the above process was not required, it was stupid. -->
+                            <!-- <button type="submit" class="btn btn-primary" name="submit">Delivered</button> -->
+
+                            <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" name="mod_btn">Delivery</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                              <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Delivery Requirements</h5>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <?php
+                                    $sql7 = "SELECT * FROM `food_qty_deliver` WHERE `school_id`='$sil' AND `deliveryDate`='$today'";
+                                    $result7 = mysqli_query($conn, $sql7);
+
+                                    while ($row6 = mysqli_fetch_assoc($result7)) {
+                                      $ris = $row6['ris'];
+                                      $rim = $row6['rim'];
+                                      $ril = $row6['ril'];
+                                      $das = $row6['das'];
+                                      $dam = $row6['dam'];
+                                      $dal = $row6['dal'];
+                                      $ros = $row6['ros'];
+                                      $rom = $row6['rom'];
+                                      $rol = $row6['rol'];
+                                    }
+                                    ?>
+                                    <table align="center" class="table table-striped">
+                                      <tr>
+                                        <td align="center"><strong>Item</strong></td>
+                                        <td align="center"><strong>Small</strong></td>
+                                        <td align="center"><strong>Medium</strong></td>
+                                        <td align="center"><strong>Large</strong></td>
+                                      </tr>
+                                      <tr>
+                                        <td align="center"><strong>Rice</strong></td>
+                                        <td align="center"><?php echo "$ris"; ?></td>
+                                        <td align="center"><?php echo "$rim"; ?></td>
+                                        <td align="center"><?php echo "$ril"; ?></td>
+                                      </tr>
+                                      <tr>
+                                        <td align="center"><strong>Dal</strong></td>
+                                        <td align="center"><?php echo "$das"; ?></td>
+                                        <td align="center"><?php echo "$dam"; ?></td>
+                                        <td align="center"><?php echo "$dal"; ?></td>
+                                      </tr>
+                                      <tr>
+                                        <td align="center"><strong>Roti</strong></td>
+                                        <td align="center"><?php echo "$ros"; ?></td>
+                                        <td align="center"><?php echo "$rom"; ?></td>
+                                        <td align="center"><?php echo "$rol"; ?></td>
+                                      </tr>
+                                    </table>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <form action="timestamp2.php" method="post">
+                                      <input type="hidden" name="school_id" value="<?php echo $sil ?>">
+                                      <button type="submit" class="btn btn-success" name="submit">Delivered</button>
+                                    </form>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+
+                          <!-- </form> -->
                           </td>
                         </tr>
                         <?php
@@ -99,7 +236,10 @@
                         // I dont know why i made this either, i guess this is do nothing as well.
                       }
                     }
-                  } elseif (mysqli_num_rows($result5) > 0) {
+                  } elseif (mysqli_num_rows($result5) > 0 && false) {
+                    //This part has been deemed unnecessary, so instead of deliting this or commenting this, i have added false
+                    //so that it never executes, hope it might be helpful somewhere
+
                     while ($row5 = mysqli_fetch_assoc($result5)) {
                       if ($row5['driver_dTime'] == NULL) {
                         ?>
@@ -107,12 +247,83 @@
                           <td align="center"><?php echo $school_name; ?></td>
                           <td align="center">
                             <!-- what to do about the redirection - solved, just redirect again -->
-                            <form action="timestamp3.php" method="post">
-                              <!-- Making the first input readonly, hidden and send it to the form as school id -->
-                              <!-- nvm the above process was not required, it was stupid. -->
-                              <input type="hidden" name="school_id" value="<?php echo $sil ?>">
-                              <button type="submit" class="btn btn-primary" name="submit">Delivered</button>
-                            </form>
+                            <!-- <form action="timestamp3.php" method="post"> -->
+                            <!-- Making the first input readonly, hidden and send it to the form as school id -->
+                            <!-- nvm the above process was not required, it was stupid. -->
+                            <!-- <input type="hidden" name="school_id" value="<?php //echo $sil ?>"> -->
+                            <!-- <button type="submit" class="btn btn-primary" name="submit">Delivered</button> -->
+
+                            <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" name="mod_btn">Delivery</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                              <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Delivery Requirements</h5>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <!-- <p>Sample text in the modal for testing.</p> -->
+                                    <?php
+                                    $sql7 = "SELECT * FROM `food_qty_deliver` WHERE `school_id`='$sil' AND `deliveryDate`='$today'";
+                                    $result7 = mysqli_query($conn, $sql7);
+
+                                    while ($row6 = mysqli_fetch_assoc($result7)) {
+                                      $ris = $row6['ris'];
+                                      $rim = $row6['rim'];
+                                      $ril = $row6['ril'];
+                                      $das = $row6['das'];
+                                      $dam = $row6['dam'];
+                                      $dal = $row6['dal'];
+                                      $ros = $row6['ros'];
+                                      $rom = $row6['rom'];
+                                      $rol = $row6['rol'];
+                                    }
+                                    ?>
+                                    <table align="center" class="table table-striped">
+                                      <tr>
+                                        <td align="center"><strong>Item</strong></td>
+                                        <td align="center"><strong>Small</strong></td>
+                                        <td align="center"><strong>Medium</strong></td>
+                                        <td align="center"><strong>Large</strong></td>
+                                      </tr>
+                                      <tr>
+                                        <td align="center"><strong>Rice</strong></td>
+                                        <td align="center"><?php echo "$ris"; ?></td>
+                                        <td align="center"><?php echo "$rim"; ?></td>
+                                        <td align="center"><?php echo "$ril"; ?></td>
+                                      </tr>
+                                      <tr>
+                                        <td align="center"><strong>Dal</strong></td>
+                                        <td align="center"><?php echo "$das"; ?></td>
+                                        <td align="center"><?php echo "$dam"; ?></td>
+                                        <td align="center"><?php echo "$dal"; ?></td>
+                                      </tr>
+                                      <tr>
+                                        <td align="center"><strong>Roti</strong></td>
+                                        <td align="center"><?php echo "$ros"; ?></td>
+                                        <td align="center"><?php echo "$rom"; ?></td>
+                                        <td align="center"><?php echo "$rol"; ?></td>
+                                      </tr>
+                                    </table>
+                                  </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <form action="timestamp3.php" method="post">
+                                      <input type="hidden" name="school_id" value="<?php echo $sil ?>">
+                                      <button type="submit" class="btn btn-success" name="submit">Delivered</button>
+                                    </form>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+
+                            <!-- </form> -->
                           </td>
                         </tr>
                         <?php

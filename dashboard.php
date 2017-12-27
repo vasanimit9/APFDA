@@ -24,5 +24,7 @@
 	//Driver file added by Rohit, edit if necessary
 	if ($_SESSION['type'] == 5) {
 		include 'driver.php';
+	} elseif ($_SESSION['type'] == 4) {
+		include 'principal.php';
 	}
 ?>

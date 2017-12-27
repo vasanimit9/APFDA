@@ -14,9 +14,9 @@
     $school_id = mysqli_real_escape_string($conn, $_POST['school_id']);
     date_default_timezone_set('Asia/Kolkata');
     $deliveryDate = date('Y-m-d');
-    $driver_dTime = date('g:i:s');
+    $driver_dTime = date('H:i:s');
 
-    $sql = "INSERT INTO `delivery_time_table` SET `deliveryDate`='$driver_dDate', `driver_dTime`='$driver_dTime', `school_id`='$school_id'";
+    $sql = "INSERT INTO `delivery_time_table` SET `deliveryDate`='$deliveryDate', `driver_dTime`='$driver_dTime', `school_id`='$school_id'";
 
     $result = mysqli_query($conn, $sql);
 
