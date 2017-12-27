@@ -1,5 +1,4 @@
-<!-- Block for custom date input -->
-<div class="row justify-content-center" id="date" style="display: none">
+
   <div class="col-sm-3 col-md-3">
     <select class="custom-select form-control" name="cYear">
       <option value="" style="display: none;" selected>Year</option>
@@ -47,4 +46,3 @@
     </select>
   </div>
   <br><br>
-</div>
