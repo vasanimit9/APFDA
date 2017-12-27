@@ -1,15 +1,18 @@
 <?php
-  if(empty($_SESSION))
+  if(empty($_SESSION)) {
     header("Location: ./");
-    $schools = array();
-    $schoolsID = array();
+  } elseif($_SESSION['type']==4 || $_SESSION['type']==3) {
+    header("Location: ./dashboard.php");
+  }
+  $schools = array();
+  $schoolsID = array();
+  $routeNo = 0;
 ?>
 
 <div class="container">
-  <br>
   <div class="row">
     <div class="col-sm-6 col-md-6 table-responsive">
-      <h5 align="center">Delivery Checkpost</h5>
+      <h3 align="center">Delivery Checkpost</h3>
       <br>
       <?php
       //routeDriver will be the property name of that particular user and the property value will be the route id
@@ -20,6 +23,8 @@
       if (mysqli_num_rows($result) == 1) {
         while ($row = mysqli_fetch_assoc($result)) {
           $route_no = $row['property_value'];
+          //Route number for later use.
+          $routeNo = $route_no;
           //To get the route for that particular driver
           $sql2 = "SELECT * FROM `routes` WHERE `route_no`='$route_no'";
           $result2 = mysqli_query($conn, $sql2);
@@ -132,12 +137,12 @@
         ?>
     </div>
     <div class="col-sm-6 col-md-6">
-      <h5 align="center">Requirement Feedback</h3>
-        <form action="requirement.php" method="post" onsubmit="return validate()">
+      <h3 align="center">Requirement Feedback</h3>
+        <form action="requirement.php" method="POST" onsubmit="return validate()">
           <br>
             <div class="row justify-content-center">
               <div class="col-sm-9 col-md-9">
-                <select class="custom-select form-control" id="select">
+                <select class="custom-select form-control" id="select" name='school'>
                   <option style="display: none;" selected value="">Select School</option>
                   <?php
                   $i = 0;
@@ -152,7 +157,7 @@
             </div>
             <br>
             <div class="row justify-content-center">
-              <label class="col-form-label" for="select1">Rice</label>
+              <!-- <label class="col-form-label" for="select1">Rice</label>
               <div class="col-sm-8 col-md-8">
                 <select class="custom-select form-control" name="selectRice" id="select1">
                   <option style="display: none;" selected value="">Open this select menu</option>
@@ -162,7 +167,8 @@
                   <option value="mPulav">Mutter Pulav</option>
                   <option value="vPulav">Veg. Pulav</option>
                 </select>
-              </div>
+              </div> -->
+              <h5>Rice</h5>
             </div>
             <br>
             <div class="row justify-content-center">
@@ -171,7 +177,7 @@
                 <input type="text" style="border: none;" readonly name="ris" value="Small">
               </div>
               <div class="col-md-6 col-sm-6">
-                <input type="number" id="ris" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+                <input type="number" id="ris" name="qris" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
@@ -181,7 +187,7 @@
                 <input type="text" style="border: none;" readonly name="rim" value="Medium">
               </div>
               <div class="col-md-6 col-sm-6">
-                <input type="number" id="rim" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+                <input type="number" id="rim" name="qrim" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
@@ -191,19 +197,20 @@
                 <input type="text" style="border: none;" readonly name="ril" value="Large">
               </div>
               <div class="col-md-6 col-sm-6">
-                <input type="number" id="ril" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+                <input type="number" id="ril" name="qril" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
             <div class="row justify-content-center">
-              <label class="col-form-label" for="select2">Dal</label>
+              <!-- <label class="col-form-label" for="select2">Dal</label>
               <div class="col-sm-8 col-md-8">
                 <select class="custom-select form-control" name="selectDal" id="select2">
                   <option style="display: none;" selected value="">Select Dal/Sabji</option>
                   <option value="dal">Dal</option>
                   <option value="sabji">Sabji</option>
                 </select>
-              </div>
+              </div> -->
+              <h5>Dal/Sabji</h5>
             </div>
             <br>
             <div class="row justify-content-center">
@@ -212,7 +219,7 @@
                 <input type="text" style="border: none;" readonly name="das" value="Small">
               </div>
               <div class="col-md-6 col-sm-6">
-                <input type="number" id="das" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+                <input type="number" id="das" name="qdas" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
@@ -222,7 +229,7 @@
                 <input type="text" style="border: none;" readonly name="dam" value="Medium">
               </div>
               <div class="col-md-6 col-sm-6">
-                <input type="number" id="dam" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+                <input type="number" id="dam" name="qdam" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
@@ -232,19 +239,20 @@
                 <input type="text" style="border: none;" readonly name="dal" value="Large">
               </div>
               <div class="col-md-6 col-sm-6">
-                <input type="number" id="dal" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+                <input type="number" id="dal" name="qdal" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
             <div class="row justify-content-center">
-              <label class="col-form-label" for="select3">Roti</label>
+              <!-- <label class="col-form-label" for="select3">Roti</label>
               <div class="col-sm-8 col-md-8">
                 <select class="custom-select form-control" name="selectRoti" id="select3">
                   <option style="display: none;" selected value="">Select Roti Type</option>
                   <option value="roti">Roti</option>
                   <option value="thepla">Thepla</option>
                 </select>
-              </div>
+              </div> -->
+              <h5>Roti</h5>
             </div>
             <br>
             <div class="row justify-content-center">
@@ -253,7 +261,7 @@
                 <input type="text" style="border: none;" readonly name="ros" value="Small">
               </div>
               <div class="col-md-6 col-sm-6">
-                <input type="number" id="ros" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+                <input type="number" id="ros" name="qros" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
@@ -263,7 +271,7 @@
                 <input type="text" style="border: none;" readonly name="rom" value="Medium">
               </div>
               <div class="col-md-6 col-sm-6">
-                <input type="number" id="rom" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+                <input type="number" id="rom" name="qrom" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
@@ -273,14 +281,71 @@
                 <input type="text" style="border: none;" readonly name="rol" value="Large">
               </div>
               <div class="col-md-6 col-sm-6">
-                <input type="number" id="rol" class="form-control" min="1" max="6" placeholder="Number of Vessels">
+                <input type="number" id="rol" name="qrol" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
               </div>
             </div>
             <br>
+            <input type="hidden" name="routeNo" value="<?php echo $routeNo; ?>" readonly disabled>
+            <div class="checkbox row justify-content-center">
+              <!-- <label><input type="checkbox" id="customDate" name="customDate" onclick="checkboxCheck()">Enter Custom Date</label> -->
+              <button type="button" class="btn btn-primary" id="customDate" name="customDate" value="on">Enter Custom Date?</button>
+            </div>
+            <br>
+            <!-- Block for custom date input -->
+            <div class="row justify-content-center" id="date" style="display: none">
+              <div class="col-sm-3 col-md-3">
+                <select class="custom-select form-control" name="cYear">
+                  <option value="" style="display: none;" selected>Year</option>
+                  <?php
+                  date_default_timezone_set('Asia/Kolkata');
+                  $today = getdate();
+                  $year = $today[year];
+                  $i = $year + 3;
+                  $year = $year - 1;
+                  while ($year < $i) {
+                    ?>
+                    <option value="<?php echo "$year"; ?>"><?php echo "$year"; ?></option>
+                    <?php
+                    $year = $year + 1;
+                  }
+                  ?>
+                </select>
+              </div>
+              <div class="col-sm-3 col-md-3">
+                <select class="custom-select form-control" name="cMonth">
+                  <option value="" style="display: none;" selected>Month</option>
+                  <?php
+                  $a = 1;
+                  while ($a <= 12) {
+                    ?>
+                    <option value="<?php echo "$a"; ?>"><?php echo "$a"; ?></option>
+                    <?php
+                    $a = $a + 1;
+                  }
+                  ?>
+                </select>
+              </div>
+              <div class="col-sm-3 col-md-3">
+                <select class="custom-select form-control" name="cDate">
+                  <option value=""style="display: none;" selected>Date</option>
+                  <?php
+                  $a = 1;
+                  while ($a <= 31) {
+                    ?>
+                    <option value="<?php echo "$a"; ?>"><?php echo "$a"; ?></option>
+                    <?php
+                    $a = $a + 1;
+                  }
+                  ?>
+                </select>
+              </div>
+              <br><br>
+            </div>
             <div class="row justify-content-center">
               <input class="btn btn-success col-sm-6 col-md-6 form-control" type="submit" name="submit" value="Send">
             </div>
         </form>
+        <br>
     </div>
   </div>
 </div>
@@ -297,11 +362,11 @@
         <?php
       } else if($_GET['m']==3) {
         ?>
-        $.notify("Time Registered!",{position:"right bottom",className:"success"});
+        $.notify("Foodback Recieved!",{position:"right bottom",className:"success"});
         <?php
       } else if($_GET['m']==4) {
         ?>
-        $.notify("Time registeration \nfailed. Contact \nmaintenance",{position: "right bottom"});
+        $.notify("Foodback failed. \nContact maintenance",{position: "right bottom"});
         <?php
       }
     }
@@ -310,17 +375,31 @@
     if($("#select").val() == "") {
       $.notify("Select school\nbefore submission. ", {position: "right bottom"});
       return false;
-    } else if ($("#select1").val() == "") {
-      $.notify("Select rice type\nbefore submission. ", {position: "right bottom"});
+    } else if (eval($("#ris").val())=="0" && eval($("#rim").val())=="0" && eval($("#ril").val())=="0") {
+      $.notify("Select rice qty\nbefore submission. ", {position: "right bottom"});
       return false;
-    } else if ($("#select2").val() == "") {
-      $.notify("Select dal/sabji\nbefore submission. ", {position: "right bottom"});
+    } else if (eval($("#das").val())=="0" && eval($("#dam").val())=="0" && eval($("#dal").val())=="0") {
+      $.notify("Select dal qty\nbefore submission. ", {position: "right bottom"});
       return false;
-    } else if ($("#select3").val() == "") {
-      $.notify("Select roti/thepla\nbefore submission. ", {position: "right bottom"});
+    } else if (eval($("#ros").val())=="0" && eval($("#rom").val())=="0" && eval($("#rol").val())=="0") {
+      $.notify("Select roti qty\nbefore submission. ", {position: "right bottom"});
       return false;
     } else {
       return true;
     }
   }
+  // function checkboxCheck() {
+  //   if ($("#customDate").val() == "on") {
+  //     document.getElementById('date').style.display = "block";
+  //     $("#customDate").val() = "off";
+  //   } else if ($("#customDate").val() == "") {
+  //     document.getElementById('date').style.display = "none";
+  //     $("#customDate").val() = "off";
+  //   }
+  // }
+  $(document).ready(function(){
+    $("#customDate").click(function(){
+        $("#date").toggle();
+    });
+});
 </script>
