@@ -55,8 +55,11 @@
 							<option value="5">Driver</option>
 						</select>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-1">
 						<button class="btn btn-primary" type="submit">Go</button>
+					</div>
+					<div class="col-md-5">
+						<a href="schools.php" class="btn btn-success">Schools &#38; Principal Settings</a>
 					</div>
 				</form>
 				<br>
@@ -168,22 +171,17 @@
 				<form action="cpanel.php" class="row">
 
 				<div class="col-md-6">
-						<input type="number" name="page" class="form-control" placeholder="Go to page">
+						<input type="number" name="page" class="form-control" placeholder="Go to page" value="<?php echo $page; ?>">
 				</div>
 				<div class="col-md-3">
-						<button type="submit" class="btn btn-primary">Go</button>
+						<button type="submit" class="btn btn-primary">Go</button>&nbsp;&nbsp;
+						<?php echo "&nbsp;Page $page &nbsp;"; ?>
 				</div>
 				<div class="col-md-3">
 					<a href="cpanel.php?page=<?php echo $page+1; ?>" class="btn btn-success">Next</a>
 				</div>
 				</form>
-<<<<<<< HEAD
 				 <!-- end form -->
-				
-=======
-
->>>>>>> 07fa5a924b0746d1c88c98904da04630f7f8907e
-
 			</div>
 
 
