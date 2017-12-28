@@ -20,7 +20,11 @@
 						$_SESSION['id'] = $row['id'];
 						$_SESSION['user_email'] = $email;
 						$_SESSION['type'] = $row['user_type'];
+						//Added user name to the session as well, i think it was better this way.
+						$_SESSION['user_name'] = $row['name'];
 						header("Location: ./dashboard.php");
+						//setting cookie to display the modal in dashboard only once
+						setcookie('username', 'Alex', time()+10000);
 					}
 				}
 			}
@@ -31,7 +35,7 @@
 				<title></title>
 			</head>
 			<body>
-				
+
 				<script type="text/javascript">
 					window.location = "./?m=1";
 				</script>

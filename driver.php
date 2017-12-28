@@ -10,6 +10,24 @@
 ?>
 
 <div class="container">
+  <div class="row justify-content-center">
+    <?php
+    //I know the code is repeated but i dont think 1 more query matters
+    $id = $_SESSION['id'];
+    $user_name = $_SESSION['user_name'];
+    $sql9 = "SELECT * FROM `users_meta` WHERE `user_id`='$id' AND `property_name`='routeDriver'";
+    $result9 = mysqli_query($conn, $sql9);
+    if (mysqli_num_rows($result9) == 1) {
+      while ($row = mysqli_fetch_assoc($result9)) {
+        $route_number = $row['property_value'];
+        ?>
+        <h5><b><i>Hello, <?php echo $user_name ?>. You are currently on route number: <?php echo $route_number ?></i></b></h5>
+        <?php
+      }
+    }
+    ?>
+  </div>
+  <br>
   <div class="row">
     <div class="col-sm-6 col-md-6 table-responsive">
       <h3 align="center">Delivery Checkpost</h3>
@@ -91,45 +109,52 @@
                                 $sql6 = "SELECT * FROM `food_qty_deliver` WHERE `school_id`='$sil' AND `deliveryDate`='$today'";
                                 $result6 = mysqli_query($conn, $sql6);
 
-                                while ($row6 = mysqli_fetch_assoc($result6)) {
-                                  $ris = $row6['ris'];
-                                  $rim = $row6['rim'];
-                                  $ril = $row6['ril'];
-                                  $das = $row6['das'];
-                                  $dam = $row6['dam'];
-                                  $dal = $row6['dal'];
-                                  $ros = $row6['ros'];
-                                  $rom = $row6['rom'];
-                                  $rol = $row6['rol'];
-                                }
-                                ?>
-                                <table align="center" class="table table-striped">
-                                  <tr>
-                                    <td align="center"><strong>Item</strong></td>
-                                    <td align="center"><strong>Small</strong></td>
-                                    <td align="center"><strong>Medium</strong></td>
-                                    <td align="center"><strong>Large</strong></td>
-                                  </tr>
-                                  <tr>
-                                    <td align="center"><strong>Rice</strong></td>
-                                    <td align="center"><?php echo "$ris"; ?></td>
-                                    <td align="center"><?php echo "$rim"; ?></td>
-                                    <td align="center"><?php echo "$ril"; ?></td>
-                                  </tr>
-                                  <tr>
-                                    <td align="center"><strong>Dal</strong></td>
-                                    <td align="center"><?php echo "$das"; ?></td>
-                                    <td align="center"><?php echo "$dam"; ?></td>
-                                    <td align="center"><?php echo "$dal"; ?></td>
-                                  </tr>
-                                  <tr>
-                                    <td align="center"><strong>Roti</strong></td>
-                                    <td align="center"><?php echo "$ros"; ?></td>
-                                    <td align="center"><?php echo "$rom"; ?></td>
-                                    <td align="center"><?php echo "$rol"; ?></td>
-                                  </tr>
-                                </table>
-                              </div>
+                                if (mysqli_num_rows($result6) == 0) {
+                                  ?>
+                                  <p><strong><i>The Food delivery list has not yet been updated.</i></strong></p>
+                                  <p><strong><i>Please inform the executives or the maintenence team.</i></strong></p>
+                                  <?php
+                                } else {
+                                  while ($row6 = mysqli_fetch_assoc($result6)) {
+                                    $ris = $row6['ris'];
+                                    $rim = $row6['rim'];
+                                    $ril = $row6['ril'];
+                                    $das = $row6['das'];
+                                    $dam = $row6['dam'];
+                                    $dal = $row6['dal'];
+                                    $ros = $row6['ros'];
+                                    $rom = $row6['rom'];
+                                    $rol = $row6['rol'];
+                                  }
+                                  ?>
+                                  <table align="center" class="table table-striped">
+                                    <tr>
+                                      <td align="center"><strong>Item</strong></td>
+                                      <td align="center"><strong>Small</strong></td>
+                                      <td align="center"><strong>Medium</strong></td>
+                                      <td align="center"><strong>Large</strong></td>
+                                    </tr>
+                                    <tr>
+                                      <td align="center"><strong>Rice</strong></td>
+                                      <td align="center"><?php echo "$ris"; ?></td>
+                                      <td align="center"><?php echo "$rim"; ?></td>
+                                      <td align="center"><?php echo "$ril"; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td align="center"><strong>Dal</strong></td>
+                                      <td align="center"><?php echo "$das"; ?></td>
+                                      <td align="center"><?php echo "$dam"; ?></td>
+                                      <td align="center"><?php echo "$dal"; ?></td>
+                                    </tr>
+                                    <tr>
+                                      <td align="center"><strong>Roti</strong></td>
+                                      <td align="center"><?php echo "$ros"; ?></td>
+                                      <td align="center"><?php echo "$rom"; ?></td>
+                                      <td align="center"><?php echo "$rol"; ?></td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              <?php } ?>
                               <div class="modal-footer">
                                 <form action="timestamp1.php" method="post">
                                   <input type="hidden" name="school_id" value="<?php echo $sil ?>">
@@ -178,44 +203,51 @@
                                     $sql7 = "SELECT * FROM `food_qty_deliver` WHERE `school_id`='$sil' AND `deliveryDate`='$today'";
                                     $result7 = mysqli_query($conn, $sql7);
 
-                                    while ($row6 = mysqli_fetch_assoc($result7)) {
-                                      $ris = $row6['ris'];
-                                      $rim = $row6['rim'];
-                                      $ril = $row6['ril'];
-                                      $das = $row6['das'];
-                                      $dam = $row6['dam'];
-                                      $dal = $row6['dal'];
-                                      $ros = $row6['ros'];
-                                      $rom = $row6['rom'];
-                                      $rol = $row6['rol'];
-                                    }
-                                    ?>
-                                    <table align="center" class="table table-striped">
-                                      <tr>
-                                        <td align="center"><strong>Item</strong></td>
-                                        <td align="center"><strong>Small</strong></td>
-                                        <td align="center"><strong>Medium</strong></td>
-                                        <td align="center"><strong>Large</strong></td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center"><strong>Rice</strong></td>
-                                        <td align="center"><?php echo "$ris"; ?></td>
-                                        <td align="center"><?php echo "$rim"; ?></td>
-                                        <td align="center"><?php echo "$ril"; ?></td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center"><strong>Dal</strong></td>
-                                        <td align="center"><?php echo "$das"; ?></td>
-                                        <td align="center"><?php echo "$dam"; ?></td>
-                                        <td align="center"><?php echo "$dal"; ?></td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center"><strong>Roti</strong></td>
-                                        <td align="center"><?php echo "$ros"; ?></td>
-                                        <td align="center"><?php echo "$rom"; ?></td>
-                                        <td align="center"><?php echo "$rol"; ?></td>
-                                      </tr>
-                                    </table>
+                                    if (mysqli_num_rows($result7) == 0) {
+                                      ?>
+                                      <p><strong><i>The Food delivery list has not yet been updated.</i></strong></p>
+                                      <p><strong><i>Please inform the executives or the maintenence team.</i></strong></p>
+                                      <?php
+                                    } else {
+                                      while ($row6 = mysqli_fetch_assoc($result7)) {
+                                        $ris = $row6['ris'];
+                                        $rim = $row6['rim'];
+                                        $ril = $row6['ril'];
+                                        $das = $row6['das'];
+                                        $dam = $row6['dam'];
+                                        $dal = $row6['dal'];
+                                        $ros = $row6['ros'];
+                                        $rom = $row6['rom'];
+                                        $rol = $row6['rol'];
+                                      }
+                                      ?>
+                                      <table align="center" class="table table-striped">
+                                        <tr>
+                                          <td align="center"><strong>Item</strong></td>
+                                          <td align="center"><strong>Small</strong></td>
+                                          <td align="center"><strong>Medium</strong></td>
+                                          <td align="center"><strong>Large</strong></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="center"><strong>Rice</strong></td>
+                                          <td align="center"><?php echo "$ris"; ?></td>
+                                          <td align="center"><?php echo "$rim"; ?></td>
+                                          <td align="center"><?php echo "$ril"; ?></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="center"><strong>Dal</strong></td>
+                                          <td align="center"><?php echo "$das"; ?></td>
+                                          <td align="center"><?php echo "$dam"; ?></td>
+                                          <td align="center"><?php echo "$dal"; ?></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="center"><strong>Roti</strong></td>
+                                          <td align="center"><?php echo "$ros"; ?></td>
+                                          <td align="center"><?php echo "$rom"; ?></td>
+                                          <td align="center"><?php echo "$rol"; ?></td>
+                                        </tr>
+                                      </table>
+                                    <?php } ?>
                                   </div>
                                   <div class="modal-footer">
                                     <form action="timestamp2.php" method="post">
@@ -272,46 +304,53 @@
                                     $sql7 = "SELECT * FROM `food_qty_deliver` WHERE `school_id`='$sil' AND `deliveryDate`='$today'";
                                     $result7 = mysqli_query($conn, $sql7);
 
-                                    while ($row6 = mysqli_fetch_assoc($result7)) {
-                                      $ris = $row6['ris'];
-                                      $rim = $row6['rim'];
-                                      $ril = $row6['ril'];
-                                      $das = $row6['das'];
-                                      $dam = $row6['dam'];
-                                      $dal = $row6['dal'];
-                                      $ros = $row6['ros'];
-                                      $rom = $row6['rom'];
-                                      $rol = $row6['rol'];
-                                    }
-                                    ?>
-                                    <table align="center" class="table table-striped">
-                                      <tr>
-                                        <td align="center"><strong>Item</strong></td>
-                                        <td align="center"><strong>Small</strong></td>
-                                        <td align="center"><strong>Medium</strong></td>
-                                        <td align="center"><strong>Large</strong></td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center"><strong>Rice</strong></td>
-                                        <td align="center"><?php echo "$ris"; ?></td>
-                                        <td align="center"><?php echo "$rim"; ?></td>
-                                        <td align="center"><?php echo "$ril"; ?></td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center"><strong>Dal</strong></td>
-                                        <td align="center"><?php echo "$das"; ?></td>
-                                        <td align="center"><?php echo "$dam"; ?></td>
-                                        <td align="center"><?php echo "$dal"; ?></td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center"><strong>Roti</strong></td>
-                                        <td align="center"><?php echo "$ros"; ?></td>
-                                        <td align="center"><?php echo "$rom"; ?></td>
-                                        <td align="center"><?php echo "$rol"; ?></td>
-                                      </tr>
-                                    </table>
-                                  </div>
-                                  </div>
+                                    if (mysqli_num_rows($result7) == 0) {
+                                      ?>
+                                      <p><strong><i>The Food delivery list has not yet been updated.</i></strong></p>
+                                      <p><strong><i>Please inform the executives or the maintenence team.</i></strong></p>
+                                      <?php
+                                    } else {
+                                      while ($row6 = mysqli_fetch_assoc($result7)) {
+                                        $ris = $row6['ris'];
+                                        $rim = $row6['rim'];
+                                        $ril = $row6['ril'];
+                                        $das = $row6['das'];
+                                        $dam = $row6['dam'];
+                                        $dal = $row6['dal'];
+                                        $ros = $row6['ros'];
+                                        $rom = $row6['rom'];
+                                        $rol = $row6['rol'];
+                                      }
+                                      ?>
+                                      <table align="center" class="table table-striped">
+                                        <tr>
+                                          <td align="center"><strong>Item</strong></td>
+                                          <td align="center"><strong>Small</strong></td>
+                                          <td align="center"><strong>Medium</strong></td>
+                                          <td align="center"><strong>Large</strong></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="center"><strong>Rice</strong></td>
+                                          <td align="center"><?php echo "$ris"; ?></td>
+                                          <td align="center"><?php echo "$rim"; ?></td>
+                                          <td align="center"><?php echo "$ril"; ?></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="center"><strong>Dal</strong></td>
+                                          <td align="center"><?php echo "$das"; ?></td>
+                                          <td align="center"><?php echo "$dam"; ?></td>
+                                          <td align="center"><?php echo "$dal"; ?></td>
+                                        </tr>
+                                        <tr>
+                                          <td align="center"><strong>Roti</strong></td>
+                                          <td align="center"><?php echo "$ros"; ?></td>
+                                          <td align="center"><?php echo "$rom"; ?></td>
+                                          <td align="center"><?php echo "$rol"; ?></td>
+                                        </tr>
+                                      </table>
+                                    </div>
+                                    </div>
+                                  <?php } ?>
                                   <div class="modal-footer">
                                     <form action="timestamp3.php" method="post">
                                       <input type="hidden" name="school_id" value="<?php echo $sil ?>">
