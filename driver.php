@@ -570,7 +570,6 @@
               <br><br>
             </div>
 
-            <div class="row justify-content-center" id="date"></div>
             <div class="row justify-content-center">
               <input class="btn btn-success col-sm-6 col-md-6 form-control" type="submit" name="submit" value="Send">
             </div>

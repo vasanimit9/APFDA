@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2017 at 05:18 PM
+-- Generation Time: Dec 28, 2017 at 04:33 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -44,7 +44,8 @@ CREATE TABLE `delivery_time_table` (
 INSERT INTO `delivery_time_table` (`id`, `deliveryDate`, `driver_dTime`, `principal_dTime`, `principal_clashDate`, `school_id`) VALUES
 (1, '2017-12-27', '21:38:35', NULL, NULL, 2),
 (2, '2017-12-26', '21:38:35', NULL, NULL, 3),
-(14, '2017-12-27', '21:43:44', NULL, NULL, 1);
+(14, '2017-12-27', '21:43:44', NULL, NULL, 1),
+(15, '2017-12-28', '18:07:13', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -57,12 +58,15 @@ CREATE TABLE `food_qty_deliver` (
   `ris` int(11) NOT NULL,
   `rim` int(11) NOT NULL,
   `ril` int(11) NOT NULL,
+  `rkg` int(11) NOT NULL,
   `das` int(11) NOT NULL,
   `dam` int(11) NOT NULL,
   `dal` int(11) NOT NULL,
-  `ros` int(11) NOT NULL,
+  `dkg` int(11) NOT NULL,
   `rom` int(11) NOT NULL,
   `rol` int(11) NOT NULL,
+  `rnum` int(11) NOT NULL,
+  `sideItem` text NOT NULL,
   `school_id` int(11) NOT NULL,
   `deliveryDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -71,12 +75,12 @@ CREATE TABLE `food_qty_deliver` (
 -- Dumping data for table `food_qty_deliver`
 --
 
-INSERT INTO `food_qty_deliver` (`id`, `ris`, `rim`, `ril`, `das`, `dam`, `dal`, `ros`, `rom`, `rol`, `school_id`, `deliveryDate`) VALUES
-(1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, '2017-12-27'),
-(2, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2, '2017-12-27'),
-(3, 1, 0, 0, 1, 0, 0, 1, 0, 0, 3, '2017-12-27'),
-(4, 1, 0, 0, 1, 0, 0, 1, 0, 0, 4, '2017-12-27'),
-(5, 1, 0, 0, 1, 0, 0, 1, 0, 0, 5, '2017-12-27');
+INSERT INTO `food_qty_deliver` (`id`, `ris`, `rim`, `ril`, `rkg`, `das`, `dam`, `dal`, `dkg`, `rom`, `rol`, `rnum`, `sideItem`, `school_id`, `deliveryDate`) VALUES
+(1, 1, 0, 0, 15, 1, 0, 0, 18, 1, 0, 2000, 'Sukhdi', 1, '2017-12-28'),
+(2, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, '0', 2, '2017-12-27'),
+(3, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, '0', 3, '2017-12-27'),
+(4, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, '0', 4, '2017-12-27'),
+(5, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, '0', 5, '2017-12-27');
 
 -- --------------------------------------------------------
 
@@ -101,11 +105,11 @@ CREATE TABLE `holidays` (
 CREATE TABLE `requirements` (
   `id` int(11) NOT NULL,
   `school_id` int(11) NOT NULL,
-  `driver_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `route_no` int(11) NOT NULL,
   `reqRice` text NOT NULL,
   `reqDal` text NOT NULL,
-  `reqRoti` text NOT NULL,
+  `reqRoti` int(11) NOT NULL,
   `registeredDate` date DEFAULT NULL,
   `requiredDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -154,8 +158,10 @@ CREATE TABLE `schools` (
   `taluka_id` int(11) NOT NULL,
   `school_id` int(11) DEFAULT NULL,
   `school_name` longtext NOT NULL,
-  `shift` int(11) NOT NULL,
-  `category` int(11) NOT NULL,
+  `morning` int(11) NOT NULL,
+  `noon` int(11) NOT NULL,
+  `pri` int(11) NOT NULL,
+  `upri` int(11) NOT NULL,
   `principal_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -163,12 +169,12 @@ CREATE TABLE `schools` (
 -- Dumping data for table `schools`
 --
 
-INSERT INTO `schools` (`id`, `taluka_id`, `school_id`, `school_name`, `shift`, `category`, `principal_user_id`) VALUES
-(1, 1, 1, 'school1', 0, 0, 0),
-(2, 1, 2, 'school2', 0, 0, 0),
-(3, 1, 3, 'school3', 0, 0, 0),
-(4, 1, 4, 'school4', 0, 0, 0),
-(5, 1, 5, 'school5', 0, 0, 0);
+INSERT INTO `schools` (`id`, `taluka_id`, `school_id`, `school_name`, `morning`, `noon`, `pri`, `upri`, `principal_user_id`) VALUES
+(1, 1, 1, 'school1', 0, 0, 0, 0, 3),
+(2, 1, 2, 'school2', 0, 0, 0, 0, 5),
+(3, 1, 3, 'school3', 0, 0, 0, 0, 7),
+(4, 1, 4, 'school4', 0, 0, 0, 0, 9),
+(5, 1, 5, 'school5', 0, 0, 0, 0, 11);
 
 -- --------------------------------------------------------
 
@@ -323,7 +329,9 @@ ALTER TABLE `routes_meta`
 -- Indexes for table `schools`
 --
 ALTER TABLE `schools`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `school_id` (`school_id`,`principal_user_id`),
+  ADD UNIQUE KEY `school_id_2` (`school_id`,`principal_user_id`);
 
 --
 -- Indexes for table `taluka`
@@ -367,7 +375,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `delivery_time_table`
 --
 ALTER TABLE `delivery_time_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `food_qty_deliver`
