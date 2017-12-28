@@ -28,7 +28,7 @@
     	</div>
   	</div>
 		<?php
-		setcookie('username', 'Alex', time()-10000);
+		setcookie('username', 'Chaku', time()-10000);
 	}
 
 	//Driver file added by Rohit, edit if necessary

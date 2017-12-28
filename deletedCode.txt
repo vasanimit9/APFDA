@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+  <!-- <label class="col-form-lable" for="rom">Medium</label> -->
+  <div class="col-md-3 col-sm-3">
+    <input type="text" style="border: none;" readonly name="rom" value="Medium">
+  </div>
+  <div class="col-md-6 col-sm-6">
+    <input type="number" id="rom" name="qrom" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
+  </div>
+</div>
+<br>
+<div class="row justify-content-center">
+  <!-- <label class="col-form-lable" for="rol">Large</label> -->
+  <div class="col-md-3 col-sm-3">
+    <input type="text" style="border: none;" readonly name="rol" value="Large">
+  </div>
+  <div class="col-md-6 col-sm-6">
+    <input type="number" id="rol" name="qrol" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
+  </div>
+</div>
+
+// function checkboxCheck() {
+//   if ($("#customDate").val() == "on") {
+//     document.getElementById('date').style.display = "block";
+//     $("#customDate").val() = "off";
+//   } else if ($("#customDate").val() == "") {
+//     document.getElementById('date').style.display = "none";
+//     $("#customDate").val() = "off";
+//   }
+// }
+
+// function ajax_date() {
+//   if(document.getElementById("date").innerHTML == "") {
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.onreadystatechange = function() {
+//       if (this.readyState == 4 && this.status == 200) {
+//        document.getElementById("date").innerHTML = this.responseText;
+//       }
+//     };
+//     xhttp.open("GET", "date.txt", true);
+//     xhttp.send();
+//     document.getElementById("customDate").innerHTML = "Use today's date";
+//   }
+//   else {
+//     document.getElementById("date").innerHTML = "";
+//     document.getElementById("customDate").innerHTML = "Use custom date";
+//   }
+// }

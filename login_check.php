@@ -24,7 +24,7 @@
 						$_SESSION['user_name'] = $row['name'];
 						header("Location: ./dashboard.php");
 						//setting cookie to display the modal in dashboard only once
-						setcookie('username', 'Alex', time()+10000);
+						setcookie('username', 'Chaku', time()+10000);
 					}
 				}
 			}

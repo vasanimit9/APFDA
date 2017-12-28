@@ -122,7 +122,6 @@
                                     $das = $row6['das'];
                                     $dam = $row6['dam'];
                                     $dal = $row6['dal'];
-                                    $ros = $row6['ros'];
                                     $rom = $row6['rom'];
                                     $rol = $row6['rol'];
                                   }
@@ -148,7 +147,7 @@
                                     </tr>
                                     <tr>
                                       <td align="center"><strong>Roti</strong></td>
-                                      <td align="center"><?php echo "$ros"; ?></td>
+                                      <td align="center">-</td>
                                       <td align="center"><?php echo "$rom"; ?></td>
                                       <td align="center"><?php echo "$rol"; ?></td>
                                     </tr>
@@ -216,7 +215,6 @@
                                         $das = $row6['das'];
                                         $dam = $row6['dam'];
                                         $dal = $row6['dal'];
-                                        $ros = $row6['ros'];
                                         $rom = $row6['rom'];
                                         $rol = $row6['rol'];
                                       }
@@ -242,7 +240,7 @@
                                         </tr>
                                         <tr>
                                           <td align="center"><strong>Roti</strong></td>
-                                          <td align="center"><?php echo "$ros"; ?></td>
+                                          <td align="center">-</td>
                                           <td align="center"><?php echo "$rom"; ?></td>
                                           <td align="center"><?php echo "$rol"; ?></td>
                                         </tr>
@@ -317,7 +315,6 @@
                                         $das = $row6['das'];
                                         $dam = $row6['dam'];
                                         $dal = $row6['dal'];
-                                        $ros = $row6['ros'];
                                         $rom = $row6['rom'];
                                         $rol = $row6['rol'];
                                       }
@@ -508,30 +505,10 @@
             <div class="row justify-content-center">
               <!-- <label class="col-form-lable" for="ros">Small</label> -->
               <div class="col-md-3 col-sm-3">
-                <input type="text" style="border: none;" readonly name="ros" value="Small">
+                <input type="text" style="border: none;" readonly name="ronum" value="Number">
               </div>
               <div class="col-md-6 col-sm-6">
-                <input type="number" id="ros" name="qros" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
-              </div>
-            </div>
-            <br>
-            <div class="row justify-content-center">
-              <!-- <label class="col-form-lable" for="rom">Medium</label> -->
-              <div class="col-md-3 col-sm-3">
-                <input type="text" style="border: none;" readonly name="rom" value="Medium">
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <input type="number" id="rom" name="qrom" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
-              </div>
-            </div>
-            <br>
-            <div class="row justify-content-center">
-              <!-- <label class="col-form-lable" for="rol">Large</label> -->
-              <div class="col-md-3 col-sm-3">
-                <input type="text" style="border: none;" readonly name="rol" value="Large">
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <input type="number" id="rol" name="qrol" class="form-control" min="0" max="5" value="0" placeholder="Number of Vessels">
+                <input type="number" id="rnum" name="rnum" class="form-control" min="0" max="5000" value="0" placeholder="Number of Rotis">
               </div>
             </div>
             <br>
@@ -603,23 +580,7 @@
   </div>
 </div>
 <script type="text/javascript">
-  function ajax_date() {
-    if(document.getElementById("date").innerHTML == "") {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-         document.getElementById("date").innerHTML = this.responseText;
-        }
-      };
-      xhttp.open("GET", "date.php", true);
-      xhttp.send();
-      document.getElementById("customDate").innerHTML = "Use today's date";
-    }
-    else {
-      document.getElementById("date").innerHTML = "";
-      document.getElementById("customDate").innerHTML = "Use custom date";
-    }
-  }
+  //Currently not in use, their servers are too slow
   <?php
     if(isset($_GET['m'])) {
       if($_GET['m'] == 1) {
@@ -645,8 +606,10 @@
       }
     }
   ?>
+</script>
+<script type="text/javascript">
   function validate() {
-    if($("#select").val() == "") {
+    if ($("#select").val() == "") {
       $.notify("Select school\nbefore submission. ", {position: "right bottom"});
       return false;
     } else if (eval($("#ris").val())=="0" && eval($("#rim").val())=="0" && eval($("#ril").val())=="0") {
@@ -655,22 +618,13 @@
     } else if (eval($("#das").val())=="0" && eval($("#dam").val())=="0" && eval($("#dal").val())=="0") {
       $.notify("Select dal qty\nbefore submission. ", {position: "right bottom"});
       return false;
-    } else if (eval($("#ros").val())=="0" && eval($("#rom").val())=="0" && eval($("#rol").val())=="0") {
+    } else if (eval($("#rnum").val())=="0") {
       $.notify("Select roti qty\nbefore submission. ", {position: "right bottom"});
       return false;
     } else {
       return true;
     }
   }
-  // function checkboxCheck() {
-  //   if ($("#customDate").val() == "on") {
-  //     document.getElementById('date').style.display = "block";
-  //     $("#customDate").val() = "off";
-  //   } else if ($("#customDate").val() == "") {
-  //     document.getElementById('date').style.display = "none";
-  //     $("#customDate").val() = "off";
-  //   }
-  // }
 
   $(document).ready(function(){
     $("#customDate").click(function(){
@@ -678,21 +632,4 @@
     });
   });
 
-  // function ajax_date() {
-  //   if(document.getElementById("date").innerHTML == "") {
-  //     var xhttp = new XMLHttpRequest();
-  //     xhttp.onreadystatechange = function() {
-  //       if (this.readyState == 4 && this.status == 200) {
-  //        document.getElementById("date").innerHTML = this.responseText;
-  //       }
-  //     };
-  //     xhttp.open("GET", "date.txt", true);
-  //     xhttp.send();
-  //     document.getElementById("customDate").innerHTML = "Use today's date";
-  //   }
-  //   else {
-  //     document.getElementById("date").innerHTML = "";
-  //     document.getElementById("customDate").innerHTML = "Use custom date";
-  //   }
-  // }
 </script>

@@ -3,7 +3,7 @@
 
   if(!isset($_SESSION['user_email'])) {
     header("./");
-  } elseif ($_SESSION['type'] != 5) {
+  } elseif ($_SESSION['type']==4) {
     header("./dashboard.php");
   }
 
@@ -19,9 +19,7 @@
     $qdas = mysqli_real_escape_string($conn, $_POST['qdas']);
     $qdam = mysqli_real_escape_string($conn, $_POST['qdam']);
     $qdal = mysqli_real_escape_string($conn, $_POST['qdal']);
-    $qros = mysqli_real_escape_string($conn, $_POST['qros']);
-    $qrom = mysqli_real_escape_string($conn, $_POST['qrom']);
-    $qrol = mysqli_real_escape_string($conn, $_POST['qrol']);
+    $rnum = mysqli_real_escape_string($conn, $_POST['rnum']);
     $y = $_POST['cYear'];
     $m = $_POST['cMonth'];
     $d = $_POST['cDate'];
@@ -75,21 +73,21 @@
     if ($testVar == 1) {
       $rice = $qris.' S '.$qrim.' M '. $qril.' L ';
       $dal = $qris.' S '.$qrim.' M '. $qril.' L ';
-      $roti = $qris.' S '.$qrim.' M '. $qril.' L ';
+      $roti = $rnum;
 
       $sql1 = "SELECT * FROM `requirements` WHERE `school_id`='$school_id' AND `registeredDate`='$today'";
       $result1 = mysqli_query($conn, $sql1);
 
       if (mysqli_num_rows(result1) == 0) {
-        $sql2 = "INSERT INTO `requirements` SET `school_id`='$school_id', `driver_id`='$driver_id', `route_no`='$routeNo', `reqRice`='$rice', `reqDal`='$dal', `reqRoti`='$roti', `registeredDate`='$today', `requiredDate`='$tommorow'";
+        $sql2 = "INSERT INTO `requirements` SET `school_id`='$school_id', `user_id`='$driver_id', `route_no`='$routeNo', `reqRice`='$rice', `reqDal`='$dal', `reqRoti`='$roti', `registeredDate`='$today', `requiredDate`='$tommorow'";
         $result2 = mysqli_query($conn, $sql2);
         if ($result2) {
           header("Location: ./dashboard.php?m=3");
         } else {
           header("Location: ./dashboard.php?m=4");
         }
-      } elseif (mysqli_num_rows(result1) == 1) {
-        $sql3 = "UPDATE `requirements` SET `driver_id`='$driver_id', `route_no`='$routeNo', `reqRice`='$rice', `reqDal`='$dal', `reqRoti`='$roti', `requiredDate`='$tommorow' WHERE `school_id`='$school_id' AND `registeredDate`='$today'";
+      } elseif (mysqli_num_rows(result1)==1 && false) {
+        $sql3 = "UPDATE `requirements` SET `user_id`='$driver_id', `route_no`='$routeNo', `reqRice`='$rice', `reqDal`='$dal', `reqRoti`='$roti', `requiredDate`='$tommorow' WHERE `school_id`='$school_id' AND `registeredDate`='$today'";
         $result3 = mysqli_query($conn, $sql3);
         if ($result3) {
           header("Location: ./dashboard.php?m=3");
@@ -97,7 +95,7 @@
           header("Location: ./dashboard.php?m=4");
         }
       } else {
-      echo "Wut";
+        header("Location: ./dashboard.php?m=3");
       }
     } elseif ($testVar == 0) {
       header("Location: ./dashboard.php?m=5");
