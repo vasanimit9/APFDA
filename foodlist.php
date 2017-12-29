@@ -91,13 +91,13 @@
  				</tr>
  				<tr>
  					<th  style="min-width: 100px;">Big</th>
- 					<th style="min-width: 80px;">Medium</th>
+ 					<th style="min-width: 100px;">Medium</th>
  					<th style="min-width: 100px;">Big</th>
- 					<th style="min-width: 80px;">Medium</th>
- 					<th style="min-width: 80px;">Small</th>
+ 					<th style="min-width: 100px;">Medium</th>
+ 					<th style="min-width: 100px;">Small</th>
  					<th style="min-width: 100px;">Big</th>
- 					<th style="min-width: 80px;">Medium</th>
- 					<th style="min-width: 80px;">Small</th>
+ 					<th style="min-width: 100px;">Medium</th>
+ 					<th style="min-width: 100px;">Small</th>
  				</tr>
  		<?php
 
@@ -153,17 +153,18 @@ for($i=0;$i<sizeof($schoolids);$i++) {
 
 setInterval(function(){
 
-	var xhttp = new XMLHttpRequest();
+	var xhttp<?php echo $schoolids[$i]; ?> = new XMLHttpRequest();
 
-	xhttp.onreadystatechange = function() {
+	xhttp<?php echo $schoolids[$i]; ?>.onreadystatechange = function() {
 		if(this.readyState == 4 && this.status == 200) {
 			var iptab<?php echo $schoolids[$i]; ?> = this.responseText.split(",");
 			$("#roti_num_<?php echo $schoolids[$i]; ?>").val(iptab<?php echo $schoolids[$i]; ?>[11]);
+			// $("#roti_num_")
 		}
 	};
 
-	xhttp.open("GET","fetch_school_data.php?id=<?php echo $schoolids[$i]; ?>",true);
-	xhttp.send();
+	xhttp<?php echo $schoolids[$i]; ?>.open("GET","fetch_school_data.php?id=<?php echo $schoolids[$i]; ?>",true);
+	xhttp<?php echo $schoolids[$i]; ?>.send();
 
 } ,10000);
 

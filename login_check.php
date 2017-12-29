@@ -46,6 +46,6 @@
 		}
 	}
 	else {
-		header("Location: ./");
+		header("Location: ./?m=1");
 	}
 ?>

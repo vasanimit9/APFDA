@@ -121,7 +121,7 @@
 
   <div class="container">
     <div class="row justify-content-center">
-      <h3>Your Foodback Please!</h3>
+      <h3>Your Feedback for Our Food (Foodback?) Please!</h3>
     </div>
     <div class="row justify-content-center">
       <small class="text-muted">Help us make our food better.</small>
