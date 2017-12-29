@@ -33,8 +33,12 @@
 
   if (mysqli_num_rows($result2) == 0) {
     ?>
-    <p><strong><i>The Food delivery list has not yet been updated.</i></strong></p>
-    <p><strong><i>Please inform the executives or the maintenence team.</i></strong></p>
+    <div class="row justify-content-center">
+      <p><strong><i>The Food delivery list has not yet been updated.</i></strong></p>
+    </div>
+    <div class="row justify-content-center">
+      <p><strong><i>Please inform the executives or the maintenence team.</i></strong></p>
+    </div>
     <?php
   } else {
     while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -160,6 +164,43 @@
     </div>
   </div>
   <br>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <h3>Please enter the today's attendance.</h3>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-sm-8">
+        <form action="attendance.php" method="post">
+          <div class="form-group row justify-content-center">
+              <label class="row justify-content-center" for="pb">Primary Boys</label>
+              <input type="number" class="form-control" id="pb" placeholder="Number">
+              <small class="form-text row justify-content-center text-muted">Enter the number of boys in Primary that took the MDM today.</small>
+          </div>
+          <div class="form-group row justify-content-center">
+              <label class="row justify-content-center" for="upb">Upper Primary Boys</label>
+              <input type="number" class="form-control" id="upb" placeholder="Number">
+              <small class="form-text row justify-content-center text-muted">Enter the number of boys in Upper Primary that took the MDM today.</small>
+          </div>
+          <div class="form-group row justify-content-center">
+              <label class="row justify-content-center" for="pg">Primary Girls</label>
+              <input type="number" class="form-control" id="pg" placeholder="Number">
+              <small class="form-text row justify-content-center text-muted">Enter the number of girls in Primary that took the MDM today.</small>
+          </div>
+          <div class="form-group row justify-content-center">
+            <label class="row justify-content-center" for="upg">Upper Primary Girls</label>
+            <input type="number" class="form-control" id="upg" placeholder="Number">
+            <small class="form-text row justify-content-center text-muted">Enter the number of girls in Upper Primary that took the MDM today.</small>
+          </div>
+          <div class="row justify-content-center">
+            <button type="submit" class="btn btn-outline-success">Register Attendance</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br>
+
   <div class="container">
     <div class="row justify-content-center">
       <h3>Please enter the food requirements for the next day.</h3>
@@ -173,12 +214,12 @@
       <div class="row justify-content-center">
         <div class="form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="holiday" id="yesCheck" onclick="holidayCheck()" value="yes"> Yes
+            <input class="form-check-input" type="radio" name="holiday" id="yesCheck" onclick="holidayCheck()" value="yes" checked>Yes
           </label>
         </div>
         <div class="form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="holiday" id="noCheck" onclick="holidayCheck()" value="no"> No
+            <input class="form-check-input" type="radio" name="holiday" id="noCheck" onclick="holidayCheck()" value="no">No
           </label>
         </div>
       </div>
@@ -356,7 +397,7 @@
       <!-- Block for custom date input, shifted on top -->
 
       <div class="row justify-content-center">
-        <input class="btn btn-success col-sm-6 col-md-6 form-control" type="submit" name="submit" value="Send">
+        <input class="btn btn-outline-success col-sm-6 col-md-6 form-control" type="submit" name="submit" value="Send">
       </div>
       <br>
     </form>

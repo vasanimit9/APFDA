@@ -17,8 +17,12 @@
 
       	<!-- Modal content-->
       	<div align="center" class="modal-content">
-        	<div class="modal-body">
-          	<h1><i>Hare Krishna!</i></h1>
+					<div class="modal-header justify-content-center">
+						<h1><b>Hare Krishna</b></h1>
+					</div>
+					<div class="modal-body">
+          	<p><i>Hare Krishna Hare Krishna, Krishna Krishna, Hare Hare!</i></p>
+						<p><i>Hare Rama Hare Rama, Rama Rama, Hare Hare!</i></p>
         	</div>
         	<div class="modal-footer justify-content-center">
           	<button type="button" class="btn btn-danger" data-dismiss="modal">Hare Krishna!</button>
