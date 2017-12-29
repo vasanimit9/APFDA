@@ -113,7 +113,7 @@
 
 					<tr>
 						<td><?php echo $row['name']; ?></td>
-						<td style="font-family: Times New Roman;"><?php echo $row['user_email']; ?></td>
+						<td><?php echo $row['user_email']; ?></td>
 						<td><?php echo $type[$row['user_type']-1]; ?></td>
 						<td>
 							<!-- the form to go to the details page of this user -->
