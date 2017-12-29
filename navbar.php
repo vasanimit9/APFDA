@@ -6,13 +6,16 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <?php if ($_SESSION['type'] < 4) { ?>
+
           <li class="nav-item active">
             <a class="nav-link" href="./cpanel.php?page=1">Admin Panel</a>
           </li>
           <?php } ?>
-          <li class="nav-item active">
+
+          <!-- <li class="nav-item active">
             <a class="nav-link" href="#">Profile</a>
-          </li>
+          </li> -->
+          
           <li class="nav-item active" id="logout_phone">
             <a class="nav-link" href="./logout.php">Log out</a>
           </li>

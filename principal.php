@@ -69,9 +69,9 @@
           </tr>
           <tr>
             <td align="center"><strong>Rice</strong></td>
-            <td align="center"><?php echo "$ril"; ?></td>
-            <td align="center"><?php echo "$rim"; ?></td>
             <td align="center"><?php echo "$ris"; ?></td>
+            <td align="center"><?php echo "$rim"; ?></td>
+            <td align="center"><?php echo "$ril"; ?></td>
             <td align="center"><?php echo "$rkg"; ?></td>
             <td align="center"><?php $totri = $ril*1.5 + $rim + $ris*0.33; echo "$totri"; ?></td>
           </tr>
