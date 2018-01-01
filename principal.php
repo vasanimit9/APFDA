@@ -111,7 +111,8 @@
 
   <div class="row justify-content-center">
     <form action="principalCheck.php" method="post">
-        <input type="submit" class="btn btn-outline-success" name="submit" value="Time Check!">
+      <input type="hidden" name="school_id" value="<?php echo $school_id ?>">
+      <input type="submit" class="btn btn-outline-success" name="submit" value="Time Check!">
     </form>
   </div>
   <div class="row justify-content-center">
@@ -200,6 +201,76 @@
     </div>
   </div>
   <br>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <h3>Add Holiday!?</h3>
+    </div>
+    <form action="registerHoliday.php" method="post">
+      <div class="row justify-content-center">
+        <small class="form-text row justify-content-center text-muted">Add the days when your school will be closed.</small>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-3 col-md-3">
+          <select class="custom-select form-control" name="cYear">
+            <option value="0" style="display: none;" selected>Year</option>
+            <?php
+            date_default_timezone_set('Asia/Kolkata');
+            $today = getdate();
+            $year = $today[year];
+            $i = $year + 3;
+            $year = $year - 1;
+            while ($year < $i) {
+              ?>
+              <option value="<?php echo "$year"; ?>"><?php echo "$year"; ?></option>
+              <?php
+              $year = $year + 1;
+            }
+            ?>
+          </select>
+        </div>
+        <div class="col-sm-3 col-md-3">
+          <select class="custom-select form-control" name="cMonth">
+            <option value="0" style="display: none;" selected>Month</option>
+            <?php
+            $a = 1;
+            while ($a <= 12) {
+              ?>
+              <option value="<?php echo "$a"; ?>"><?php echo "$a"; ?></option>
+              <?php
+              $a = $a + 1;
+            }
+            ?>
+          </select>
+        </div>
+        <div class="col-sm-3 col-md-3">
+          <select class="custom-select form-control" name="cDate">
+            <option value="0" style="display: none;" selected>Date</option>
+            <?php
+            $a = 1;
+            while ($a <= 31) {
+              ?>
+              <option value="<?php echo "$a"; ?>"><?php echo "$a"; ?></option>
+              <?php
+              $a = $a + 1;
+            }
+            ?>
+          </select>
+        </div>
+        <br><br>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-4 col-sm-4">
+          <textarea class="form-control" rows="5" placeholder="Please enter the reason for your holiday."></textarea>
+        </div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <input type="submit" class="btn btn-outline-success" name="submit" value="Register Holiday">
+      </div>
+    </form>
+    <br>
+  </div>
 
   <div class="container">
     <div class="row justify-content-center">
@@ -406,11 +477,35 @@
 </div>
 
 <script type="text/javascript">
-
-function holidayCheck() {
+  function holidayCheck() {
     if (document.getElementById('noCheck').checked) {
         document.getElementById('ifNo').style.display = 'block';
     }
     else document.getElementById('ifNo').style.display = 'none';
-}
+  }
+  <?php
+    if(isset($_GET['m'])) {
+      if($_GET['m'] == 1) {
+        ?>
+        $.notify("Time Registered!", {position:"left bottom",className:"success"});
+        <?php
+      } elseif($_GET['m'] == 2) {
+        ?>
+        $.notify("Time registeration \nfailed. Contact \nmaintenance", {position: "left bottom"});
+        <?php
+      } elseif($_GET['m'] == 3) {
+        ?>
+        $.notify("Feedback Recieved!", {position:"right bottom",className:"success"});
+        <?php
+      } elseif($_GET['m'] == 4) {
+        ?>
+        $.notify("Foodback failed. \nContact maintenance.", {position: "right bottom"});
+        <?php
+      } elseif($_GET['m'] == 5) {
+        ?>
+        $.notify("Incorrect Date Format.", {position: "right bottom"});
+        <?php
+      }
+    }
+  ?>
 </script>
