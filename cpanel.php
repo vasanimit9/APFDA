@@ -90,7 +90,7 @@
 		//displaying the users in a table
 ?>
 
-				<table class="table table-responsive table-striped">
+				<table class="table table-responsive table-striped" style="font-size: 0.9em;">
 					<tr>
 						<th style="min-width: 100px">Name</th>
 						<th style="min-width: 100px">Email</th>
